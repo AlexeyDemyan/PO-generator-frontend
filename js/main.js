@@ -1,11 +1,7 @@
 import { getData, sendData } from "./api.js";
 
-const mainButton = document.querySelector(".main-button");
 const testButton = document.querySelector(".test-button");
-
-mainButton.addEventListener("click", () => {
-  console.log("button clicked!");
-});
+const poSendForm = document.querySelector('.po-send-form');
 
 testButton.addEventListener("click", () => {
   console.log("attempting to fetch data");
@@ -14,7 +10,19 @@ testButton.addEventListener("click", () => {
       console.log(data)
     },
     (error) => {
-      showAlert(`${error} - Не удается подгрузить данные. попробуйте еще`);
+      console.log(`${error} - Не удается подгрузить данные. попробуйте еще`);
     }
   );
 });
+
+poSendForm.addEventListener('submit', (evt) => {
+  evt.preventDefault();
+
+  const formData = new FormData(evt.target);
+
+  sendData(() => {
+    console.log('success! Check the DB now')
+  }, () => {
+    throw new Error('Unable to send data')
+  }, formData)
+})
