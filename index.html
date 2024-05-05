@@ -33,10 +33,10 @@
               <div class="form_content--container">
                 <div class="form-content">
 
-                  <form class="po-send-form">
+                  <form action="/form" method="POST" class="po-send-form">
                     <button class="test-button"></button>
                     <label for="user">User:</label><br>
-                    <select id="users" name="users">
+                    <select id="user" name="user">
                       <option value="User_1">User_1</option>
                       <option value="User_2">User_2</option>
                     </select><br>
@@ -46,17 +46,17 @@
                       <option value="Company_2">Company_2</option>
                     </select><br>
                     <label for="date">Date:</label><br>
-                    <input type="date"><br>
+                    <input name="date" type="date"><br>
                     <label for="supplier">Supplier:</label><br>
-                    <input type="text"><br>
-                    <label for="supplier_addres">Supplier Address:</label><br>
-                    <input type="text"><br>
+                    <input name="supplier" type="text"><br>
+                    <label for="supplier_address">Supplier Address:</label><br>
+                    <input name="supplier_address" type="text"><br>
                     <label for="supplier_code">Supplier Code:</label><br>
-                    <input type="text"><br>
-                    <label for="dalivery_date">Delivary Date:</label><br>
-                    <input type="date"><br>
+                    <input name="supplier_code" type="text"><br>
+                    <label for="delivery_date">Delivary Date:</label><br>
+                    <input name="delivery_date" type="date"><br>
                     <label for="order">Order:</label><br>
-                    <input type="text"><br>
+                    <input name="order" type="text"><br>
                     <h2>Order Lines</h2><br>
                     <input type="text"><br>
                     <input type="text"><br>
@@ -72,15 +72,15 @@
                     <input type="text"><br>
                     <input type="text"><br><br>
                     <label for="payment_terms">Payment Terms:</label><br>
-                    <input type="text"><br>
+                    <input name="payment_terms" type="text"><br>
                     <label for="other_remarks">Other Remarks:</label><br>
-                    <input type="text"><br>
+                    <input name="other_remarks" type="text"><br>
                     <label for="discount">Discount:</label><br>
-                    <input type="number"><br>
+                    <input name="discount" type="number"><br>
                     <label for="net_total_value">Net Total Value:</label><br>
-                    <input type="number"><br>
+                    <input name="net_total_value" type="number"><br>
                     <label for="price_includes_vat">Price Includes VAT:</label><br>
-                    <input type="checkbox"><br>
+                    <input name="price_includes_vat" type="checkbox"><br>
                     <input type="submit" value="Submit PO">
                   </form>
                 </div>

@@ -2,6 +2,9 @@ const sendData = (onSuccess, onFail, formData) => {
   fetch('http://localhost:3333/po_entries',
     {
       method: 'POST',
+      headers: {
+        "Content-Type": "application/json",
+      },
       body: formData
     })
     .then((response) => {

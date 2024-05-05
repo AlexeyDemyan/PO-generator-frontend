@@ -20,9 +20,15 @@ poSendForm.addEventListener('submit', (evt) => {
 
   const formData = new FormData(evt.target);
 
+  let newObj = {};
+  formData.forEach((value, key) => newObj[key] = value);
+  let newObjToJson = JSON.stringify(newObj)
+
+  console.log(newObjToJson)
+
   sendData(() => {
-    console.log('success! Check the DB now')
+    console.log('success! Check the DB now');
   }, () => {
     throw new Error('Unable to send data')
-  }, formData)
+  }, newObjToJson)
 })
