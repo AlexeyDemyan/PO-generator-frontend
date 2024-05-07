@@ -1,21 +1,8 @@
 import { getData, sendData } from "./api.js";
-import { poEntry } from "./POEntry.js";
+import { renderPoEntry } from "./POEntry.js";
 
-// const testButton = document.querySelector(".test-button");
 const poSendForm = document.querySelector(".po-send-form");
-const outputArea = document.querySelector(".information__inner");
-
-// testButton.addEventListener("click", () => {
-//   console.log("attempting to fetch data");
-//   getData(
-//     (data) => {
-//       console.log(data);
-//     },
-//     (error) => {
-//       console.log(`${error} - Не удается подгрузить данные. попробуйте еще`);
-//     }
-//   );
-// });
+// const outputArea = document.querySelector(".po-entries-list--container");
 
 poSendForm.addEventListener("submit", (evt) => {
   evt.preventDefault();
@@ -44,7 +31,8 @@ getData(
   (data) => {
     console.log(data);
     data.forEach((entry) => {
-      poEntry(entry);
+      console.log(entry.user)
+      renderPoEntry(entry);
     });
   },
   (error) => {

@@ -1,15 +1,23 @@
 const bodyElement = document.querySelector("body");
-const poEntriesSectionElement = bodyElement.querySelector(
-  ".information__inner"
+const poEntriesListElement = bodyElement.querySelector(
+  ".po-entries-list"
 );
 
-export const poEntry = (poEntry) => {
-  const poEntryFragment = document.createDocumentFragment();
-  Object.values(poEntry).forEach((value) => {
-    let currentDiv = document.createElement("div");
-    currentDiv.innerHTML = value;
-    poEntryFragment.appendChild(currentDiv);
-  });
+export const renderPoEntry = (poEntry) => {
+  const poEntryListItem = document.createElement('li');
 
-  poEntriesSectionElement.appendChild(poEntryFragment);
+  const poEntryUserTextItem = document.createElement('p');
+  poEntryUserTextItem.innerText = poEntry.user;
+
+  const poEntryCompanyTextItem = document.createElement('p');
+  poEntryCompanyTextItem.innerText = poEntry.company;
+
+  const poEntrySupplierTextItem = document.createElement('p');
+  poEntrySupplierTextItem.innerText = poEntry.supplier;
+
+  poEntryListItem.appendChild(poEntryUserTextItem);
+  poEntryListItem.appendChild(poEntryCompanyTextItem);
+  poEntryListItem.appendChild(poEntrySupplierTextItem);
+
+  poEntriesListElement.appendChild(poEntryListItem);
 };
