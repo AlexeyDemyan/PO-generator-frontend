@@ -2,7 +2,10 @@ import { getData, sendData } from "./api.js";
 import { renderPoEntry } from "./POEntry.js";
 
 const poSendForm = document.querySelector(".po-send-form");
-// const outputArea = document.querySelector(".po-entries-list--container");
+const bodyElement = document.querySelector("body");
+const poEntriesListElement = bodyElement.querySelector(
+  ".po-entries-list"
+);
 
 poSendForm.addEventListener("submit", (evt) => {
   evt.preventDefault();
@@ -13,11 +16,26 @@ poSendForm.addEventListener("submit", (evt) => {
   formData.forEach((value, key) => (newObj[key] = value));
   let newObjToJson = JSON.stringify(newObj);
 
-  console.log(newObjToJson);
+  //console.log(newObjToJson);
 
   sendData(
     () => {
-      console.log("success! Check the DB now");
+      console.log("Success! Refreshing the list now...");
+
+      poEntriesListElement.innerHTML = '';
+
+      getData(
+        (data) => {
+          //console.log(data);
+          data.forEach((entry) => {
+            //console.log(entry.user);
+            renderPoEntry(entry);
+          });
+        },
+        (error) => {
+          console.log(`${error} - Unable to load data`);
+        }
+      );
     },
     () => {
       throw new Error("Unable to send data");
@@ -26,16 +44,17 @@ poSendForm.addEventListener("submit", (evt) => {
   );
 });
 
-console.log("attempting to fetch data");
+console.log("attempting to fetch data...");
+
 getData(
   (data) => {
-    console.log(data);
+    //console.log(data);
     data.forEach((entry) => {
-      console.log(entry.user)
+      //console.log(entry.user);
       renderPoEntry(entry);
     });
   },
   (error) => {
-    console.log(`${error} - Не удается подгрузить данные. попробуйте еще`);
+    console.log(`${error} - Unable to load data`);
   }
 );
