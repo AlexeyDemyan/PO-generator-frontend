@@ -6,6 +6,9 @@ const poEntriesListElement = bodyElement.querySelector(
 export const renderPoEntry = (poEntry) => {
   const poEntryListItem = document.createElement('li');
 
+  const poEntryNumberTextItem = document.createElement('p');
+  poEntryNumberTextItem.innerText = poEntry.orderNumber;
+
   const poEntryUserTextItem = document.createElement('p');
   poEntryUserTextItem.innerText = poEntry.user;
 
@@ -15,9 +18,11 @@ export const renderPoEntry = (poEntry) => {
   const poEntrySupplierTextItem = document.createElement('p');
   poEntrySupplierTextItem.innerText = poEntry.supplier;
 
+  poEntryListItem.appendChild(poEntryNumberTextItem);
   poEntryListItem.appendChild(poEntryUserTextItem);
   poEntryListItem.appendChild(poEntryCompanyTextItem);
   poEntryListItem.appendChild(poEntrySupplierTextItem);
+
 
   poEntriesListElement.appendChild(poEntryListItem);
 };

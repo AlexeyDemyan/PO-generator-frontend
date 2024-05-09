@@ -48,11 +48,11 @@ console.log("attempting to fetch data...");
 
 getData(
   (data) => {
-    //console.log(data);
+    console.log(data[0])
     data.forEach((entry) => {
-      //console.log(entry.user);
       renderPoEntry(entry);
     });
+    console.log('Data obtained successfully!')
   },
   (error) => {
     console.log(`${error} - Unable to load data`);
