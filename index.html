@@ -19,7 +19,7 @@
           <p class="modal-user"></p>
           <p class="modal-company"></p>
           <p class="modal-supplier"></p>
-          <button class="modal-print">Print</button>
+          <button class="modal-print standard-button">Print</button>
         </div>
       </div>
 
@@ -78,7 +78,7 @@
                     </div>
                     <ul name="order_lines" class="order_lines">
                     </ul>
-                    <button class="add-new-line-button">Add New Line</button>
+                    <button class="add-new-line-button standard-button">Add New Line</button>
                     <label for="payment_terms">Payment Terms:</label>
                     <input name="payment_terms" type="text">
                     <label for="other_remarks">Other Remarks:</label>
@@ -88,8 +88,11 @@
                     <label for="net_total_value">Net Total Value:</label>
                     <input name="net_total_value" type="number">
                     <label for="price_includes_vat">Price Includes VAT:</label>
-                    <input name="price_includes_vat" type="checkbox">
-                    <input type="submit" value="Submit PO">
+                    <select id="price_includes_vat" name="price_includes_vat">
+                      <option value="Yes">Yes</option>
+                      <option value="No">No</option>
+                    </select>
+                    <input class="standard-button" type="submit" value="Submit PO">
                   </form>
                 </div>
               </div>

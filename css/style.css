@@ -18,7 +18,7 @@ body {
 
 .container {
   width: 100%;
-  max-width: 1000px;
+  max-width: 1400px;
   margin: 0 auto;
 }
 
@@ -30,8 +30,19 @@ section {
 input,
 select {
   border-radius: 5px;
+  min-height: 40px;
+  font-size: 100%;
   height: auto;
   padding: 5px;
+  margin-bottom: 10px;
+}
+
+.standard-button {
+  height: 50px;
+  width: 100px;
+  border-radius: 5px;
+  border: 3px solid #3882f6;
+  font-size: 100%;
 }
 
 /* Modal */
@@ -130,7 +141,8 @@ label {
 .order_lines li {
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: center;
+  margin-bottom: 10px;
 }
 
 /* PO Entries List */
