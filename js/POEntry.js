@@ -3,6 +3,13 @@ const poEntriesListElement = bodyElement.querySelector(
   ".po-entries-list"
 );
 
+const modalElement = bodyElement.querySelector(".modal");
+const closeButton = modalElement.querySelector(".close");
+
+closeButton.addEventListener('click', () => {
+  modalElement.style.display = 'none'
+})
+
 export const renderPoEntry = (poEntry) => {
   const poEntryListItem = document.createElement('li');
 
@@ -23,6 +30,10 @@ export const renderPoEntry = (poEntry) => {
   poEntryListItem.appendChild(poEntryCompanyTextItem);
   poEntryListItem.appendChild(poEntrySupplierTextItem);
 
+  poEntryListItem.addEventListener('click', () => {
+    console.log(poEntry.company);
+    modalElement.style.display = 'block';
+  })
 
   poEntriesListElement.appendChild(poEntryListItem);
 };
