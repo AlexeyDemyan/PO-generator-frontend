@@ -1,14 +1,16 @@
+import { renderModal } from "./modal.js";
+
 const bodyElement = document.querySelector("body");
 const poEntriesListElement = bodyElement.querySelector(
   ".po-entries-list"
 );
 
-const modalElement = bodyElement.querySelector(".modal");
-const closeButton = modalElement.querySelector(".close");
+// const modalElement = bodyElement.querySelector(".modal");
+// const closeButton = modalElement.querySelector(".close");
 
-closeButton.addEventListener('click', () => {
-  modalElement.style.display = 'none'
-})
+// closeButton.addEventListener('click', () => {
+//   modalElement.style.display = 'none'
+// })
 
 export const renderPoEntry = (poEntry) => {
   const poEntryListItem = document.createElement('li');
@@ -31,9 +33,8 @@ export const renderPoEntry = (poEntry) => {
   poEntryListItem.appendChild(poEntrySupplierTextItem);
 
   poEntryListItem.addEventListener('click', () => {
-    console.log(poEntry.company);
-    modalElement.style.display = 'block';
-  })
+    renderModal(poEntry)
+  });
 
   poEntriesListElement.appendChild(poEntryListItem);
 };

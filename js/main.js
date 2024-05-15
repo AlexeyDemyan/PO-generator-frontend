@@ -7,6 +7,18 @@ const poEntriesListElement = bodyElement.querySelector(
   ".po-entries-list"
 );
 
+const modalElement = bodyElement.querySelector(".modal");
+const closeButton = modalElement.querySelector(".close");
+const modalPrintButton = modalElement.querySelector('.modal-print');
+
+closeButton.addEventListener('click', () => {
+  modalElement.style.display = 'none'
+});
+
+modalPrintButton.addEventListener('click', () => {
+  window.print();
+})
+
 poSendForm.addEventListener("submit", (evt) => {
   evt.preventDefault();
 
