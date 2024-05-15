@@ -16,9 +16,9 @@
       <div class="modal">
         <div class="modal-content">
           <span class="close">&times;</span>
-          <p class="modal-user"></p><br>
-          <p class="modal-company"></p><br>
-          <p class="modal-supplier"></p><br>
+          <p class="modal-user"></p>
+          <p class="modal-company"></p>
+          <p class="modal-supplier"></p>
           <button class="modal-print">Print</button>
         </div>
       </div>
@@ -46,53 +46,49 @@
                 <div class="form-content">
 
                   <form action="/form" method="POST" class="po-send-form">
-                    <!-- <button class="test-button"></button> -->
-                    <label for="user">User:</label><br>
+                    <label for="user">User:</label>
                     <select id="user" name="user">
                       <option value="User_1">User_1</option>
                       <option value="User_2">User_2</option>
-                    </select><br>
-                    <label for="company">Company:</label><br>
+                    </select>
+                    <label for="company">Company:</label>
                     <select id="company" name="company">
                       <option value="Company_1">Company_1</option>
                       <option value="Company_2">Company_2</option>
-                    </select><br>
-                    <label for="date">Date:</label><br>
-                    <input name="date" type="date"><br>
-                    <label for="supplier">Supplier:</label><br>
-                    <input name="supplier" type="text"><br>
-                    <label for="supplier_address">Supplier Address:</label><br>
-                    <input name="supplier_address" type="text"><br>
-                    <label for="supplier_code">Supplier Code:</label><br>
-                    <input name="supplier_code" type="text"><br>
-                    <label for="delivery_date">Delivary Date:</label><br>
-                    <input name="delivery_date" type="date"><br>
-                    <label for="order">Order:</label><br>
-                    <input name="order" type="text"><br>
-                    <h2>Order Lines</h2><br>
-                    <input type="text"><br>
-                    <input type="text"><br>
-                    <input type="text"><br>
-                    <input type="text"><br>
-                    <input type="text"><br>
-                    <input type="text"><br>
-                    <input type="text"><br>
-                    <input type="text"><br>
-                    <input type="text"><br>
-                    <input type="text"><br>
-                    <input type="text"><br>
-                    <input type="text"><br>
-                    <input type="text"><br><br>
-                    <label for="payment_terms">Payment Terms:</label><br>
-                    <input name="payment_terms" type="text"><br>
-                    <label for="other_remarks">Other Remarks:</label><br>
-                    <input name="other_remarks" type="text"><br>
-                    <label for="discount">Discount:</label><br>
-                    <input name="discount" type="number"><br>
-                    <label for="net_total_value">Net Total Value:</label><br>
-                    <input name="net_total_value" type="number"><br>
-                    <label for="price_includes_vat">Price Includes VAT:</label><br>
-                    <input name="price_includes_vat" type="checkbox"><br>
+                    </select>
+                    <label for="date">Date:</label>
+                    <input name="date" type="date">
+                    <label for="supplier">Supplier:</label>
+                    <input name="supplier" type="text">
+                    <label for="supplier_address">Supplier Address:</label>
+                    <input name="supplier_address" type="text">
+                    <label for="supplier_code">Supplier Code:</label>
+                    <input name="supplier_code" type="text">
+                    <label for="delivery_date">Delivery Date:</label>
+                    <input name="delivery_date" type="date">
+                    <label for="order">Order:</label>
+                    <input name="order" type="text">
+                    <label for="order_lines"><h2>Order Lines</h2></label>
+                    <div class="order_lines-header">
+                    <p>Product</p>
+                    <p>Supplier Ref.</p>
+                    <p>Quantity</p>
+                    <p>Unit Price</p>
+                    <p>Total Price</p>
+                    </div>
+                    <ul name="order_lines" class="order_lines">
+                    </ul>
+                    <button class="add-new-line-button">Add New Line</button>
+                    <label for="payment_terms">Payment Terms:</label>
+                    <input name="payment_terms" type="text">
+                    <label for="other_remarks">Other Remarks:</label>
+                    <input name="other_remarks" type="text">
+                    <label for="discount">Discount:</label>
+                    <input name="discount" type="number">
+                    <label for="net_total_value">Net Total Value:</label>
+                    <input name="net_total_value" type="number">
+                    <label for="price_includes_vat">Price Includes VAT:</label>
+                    <input name="price_includes_vat" type="checkbox">
                     <input type="submit" value="Submit PO">
                   </form>
                 </div>

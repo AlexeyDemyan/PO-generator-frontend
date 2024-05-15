@@ -1,15 +1,25 @@
 import { getData, sendData } from "./api.js";
 import { renderPoEntry } from "./POEntry.js";
+import { renderOrderLine } from "./order-line.js";
 
-const poSendForm = document.querySelector(".po-send-form");
 const bodyElement = document.querySelector("body");
+const poSendForm = bodyElement.querySelector(".po-send-form");
 const poEntriesListElement = bodyElement.querySelector(
   ".po-entries-list"
 );
 
+const addNewLineButton = bodyElement.querySelector('.add-new-line-button');
+
 const modalElement = bodyElement.querySelector(".modal");
 const closeButton = modalElement.querySelector(".close");
 const modalPrintButton = modalElement.querySelector('.modal-print');
+
+renderOrderLine();
+
+addNewLineButton.addEventListener('click', (evt) => {
+  evt.preventDefault();
+  renderOrderLine();
+})
 
 closeButton.addEventListener('click', () => {
   modalElement.style.display = 'none'
@@ -26,9 +36,10 @@ poSendForm.addEventListener("submit", (evt) => {
 
   let newObj = {};
   formData.forEach((value, key) => (newObj[key] = value));
+  newObj.orderLines = ['ione', 'two'];
   let newObjToJson = JSON.stringify(newObj);
 
-  //console.log(newObjToJson);
+  console.log(newObjToJson);
 
   sendData(
     () => {

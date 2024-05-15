@@ -1,39 +1,19 @@
 import { renderModal } from "./modal.js";
 
 const bodyElement = document.querySelector("body");
-const poEntriesListElement = bodyElement.querySelector(
-  ".po-entries-list"
-);
-
-// const modalElement = bodyElement.querySelector(".modal");
-// const closeButton = modalElement.querySelector(".close");
-
-// closeButton.addEventListener('click', () => {
-//   modalElement.style.display = 'none'
-// })
+const poEntriesListElement = bodyElement.querySelector(".po-entries-list");
 
 export const renderPoEntry = (poEntry) => {
-  const poEntryListItem = document.createElement('li');
+  const poEntryListItem = document.createElement("li");
 
-  const poEntryNumberTextItem = document.createElement('p');
-  poEntryNumberTextItem.innerText = poEntry.orderNumber;
+  poEntryListItem.innerHTML = `
+  <p>${poEntry.orderNumber}</p>
+  <p>${poEntry.user}</p>
+  <p>${poEntry.company}</p>
+  <p>${poEntry.supplier}</p>`;
 
-  const poEntryUserTextItem = document.createElement('p');
-  poEntryUserTextItem.innerText = poEntry.user;
-
-  const poEntryCompanyTextItem = document.createElement('p');
-  poEntryCompanyTextItem.innerText = poEntry.company;
-
-  const poEntrySupplierTextItem = document.createElement('p');
-  poEntrySupplierTextItem.innerText = poEntry.supplier;
-
-  poEntryListItem.appendChild(poEntryNumberTextItem);
-  poEntryListItem.appendChild(poEntryUserTextItem);
-  poEntryListItem.appendChild(poEntryCompanyTextItem);
-  poEntryListItem.appendChild(poEntrySupplierTextItem);
-
-  poEntryListItem.addEventListener('click', () => {
-    renderModal(poEntry)
+  poEntryListItem.addEventListener("click", () => {
+    renderModal(poEntry);
   });
 
   poEntriesListElement.appendChild(poEntryListItem);
