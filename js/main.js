@@ -1,6 +1,7 @@
 import { getData, sendData } from "./api.js";
 import { renderPoEntry } from "./POEntry.js";
 import { renderOrderLine } from "./order-line.js";
+import { createOrderLineDTO } from "./order-line-dto.js";
 
 const bodyElement = document.querySelector("body");
 const poSendForm = bodyElement.querySelector(".po-send-form");
@@ -14,11 +15,15 @@ const modalElement = bodyElement.querySelector(".modal");
 const closeButton = modalElement.querySelector(".close");
 const modalPrintButton = modalElement.querySelector('.modal-print');
 
-renderOrderLine();
+let orderLinesRenderedAmount = 0;
+const maxOrderLinesRenderedAmount = 10;
+renderOrderLine(orderLinesRenderedAmount, maxOrderLinesRenderedAmount);
+orderLinesRenderedAmount++;
 
 addNewLineButton.addEventListener('click', (evt) => {
   evt.preventDefault();
-  renderOrderLine();
+  renderOrderLine(orderLinesRenderedAmount, maxOrderLinesRenderedAmount);
+  orderLinesRenderedAmount++;
 })
 
 closeButton.addEventListener('click', () => {
@@ -36,7 +41,7 @@ poSendForm.addEventListener("submit", (evt) => {
 
   let newObj = {};
   formData.forEach((value, key) => (newObj[key] = value));
-  newObj.orderLines = ['ione', 'two'];
+  newObj.orderLines = createOrderLineDTO();
   let newObjToJson = JSON.stringify(newObj);
 
   console.log(newObjToJson);
