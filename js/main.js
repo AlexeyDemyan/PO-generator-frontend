@@ -2,37 +2,47 @@ import { getData, sendData } from "./api.js";
 import { renderPoEntry } from "./POEntry.js";
 import { renderOrderLine } from "./order-line.js";
 import { createOrderLineDTO } from "./order-line-dto.js";
+import { previewPrint } from "./preview-print.js";
 
 const bodyElement = document.querySelector("body");
 const poSendForm = bodyElement.querySelector(".po-send-form");
-const poEntriesListElement = bodyElement.querySelector(
-  ".po-entries-list"
-);
+const poEntriesListElement = bodyElement.querySelector(".po-entries-list");
 
-const addNewLineButton = bodyElement.querySelector('.add-new-line-button');
+const addNewLineButton = bodyElement.querySelector(".add-new-line-button");
 
 const modalElement = bodyElement.querySelector(".modal");
 const closeButton = modalElement.querySelector(".close");
-const modalPrintButton = modalElement.querySelector('.modal-print');
+// const modalPrintButton = modalElement.querySelector(".modal-print");
+const testButton = bodyElement.querySelector(".test-button");
 
 let orderLinesRenderedAmount = 0;
 const maxOrderLinesRenderedAmount = 10;
 renderOrderLine(orderLinesRenderedAmount, maxOrderLinesRenderedAmount);
 orderLinesRenderedAmount++;
 
-addNewLineButton.addEventListener('click', (evt) => {
+addNewLineButton.addEventListener("click", (evt) => {
   evt.preventDefault();
   renderOrderLine(orderLinesRenderedAmount, maxOrderLinesRenderedAmount);
   orderLinesRenderedAmount++;
-})
-
-closeButton.addEventListener('click', () => {
-  modalElement.style.display = 'none'
 });
 
-modalPrintButton.addEventListener('click', () => {
-  window.print();
+closeButton.addEventListener("click", () => {
+  modalElement.style.display = "none";
+});
+
+document.addEventListener("keydown", (evt) => {
+  if (evt.key === "Escape") {
+    modalElement.style.display = "none";
+  }
+});
+
+testButton.addEventListener('click', () => {
+  previewPrint();
 })
+
+// modalPrintButton.addEventListener("click", () => {
+//   window.print();
+// });
 
 poSendForm.addEventListener("submit", (evt) => {
   evt.preventDefault();
@@ -50,7 +60,7 @@ poSendForm.addEventListener("submit", (evt) => {
     () => {
       console.log("Success! Refreshing the list now...");
 
-      poEntriesListElement.innerHTML = '';
+      poEntriesListElement.innerHTML = "";
 
       getData(
         (data) => {
@@ -80,7 +90,7 @@ getData(
     data.forEach((entry) => {
       renderPoEntry(entry);
     });
-    console.log('Data obtained successfully!')
+    console.log("Data obtained successfully!");
   },
   (error) => {
     console.log(`${error} - Unable to load data`);
