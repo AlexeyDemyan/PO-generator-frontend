@@ -54,7 +54,7 @@ poSendForm.addEventListener("submit", (evt) => {
 
       getData(
         (data) => {
-          //console.log(data);
+          // console.log(data[5]);
           data.forEach((entry) => {
             //console.log(entry.user);
             renderPoEntry(entry);
@@ -76,7 +76,7 @@ console.log("attempting to fetch data...");
 
 getData(
   (data) => {
-    console.log(data[0])
+    // console.log(data[5]);
     data.forEach((entry) => {
       renderPoEntry(entry);
     });
