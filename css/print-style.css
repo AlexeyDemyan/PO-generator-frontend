@@ -1,3 +1,62 @@
-h1 {
-  color:blue
+body {
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  color: #1f2937;
+}
+
+.container {
+  width: 95%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+header,
+footer,
+div {
+  display: grid;
+}
+
+/* Header */
+
+header {
+  width: 200px;
+  align-self: center;
+  display: grid;
+  grid-template-columns: 100px 200px;
+  grid-template-rows: 160px 40px;
+  grid-template-areas:
+    "header__logo header__address"
+    "header__company header__address";
+}
+
+.header__logo {
+  grid-area: header__logo;
+}
+
+.header__address {
+  grid-area: header__address;
+}
+
+.header__company {
+  grid-area: header__company;
+}
+
+/* Title */
+
+.section__title {
+  text-align: center;
+}
+
+/* Company List */
+
+.section__company-list ul {
+  list-style: none;
+}
+
+.section__company-list ul li {
+  display: flex;
+  align-items: center;
+  align-content: space-between;
 }

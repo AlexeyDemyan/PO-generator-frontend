@@ -3,146 +3,150 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="css/print-style.css" />
     <title>Print PO</title>
   </head>
   <body>
-    <header class="header">
-      <div class="container">
-        <div class="header__inner">
+    <div class="container">
+      <header class="header">
           <div class="header__logo">Logo</div>
           <div class="header__company">Company Name</div>
-          <div class="header-address">
+          <div class="header__address">
             <p>Street</p>
             <p>City/Post Code</p>
             <p>Malta</p>
             <p>Telephone</p>
           </div>
-        </div>
-      </div>
-    </header>
-    <div class="section section__title">Purchase Order</div>
-    <div class="section section__company-list">
-      <ul>
-        <li>
-          <div class="company">Company 1</div>
-          <div class="tickbox">tickbox</div>
-          <div class="vat">vat number</div>
-        </li>
-        <li>
-          <div class="company">Company 2</div>
-          <div class="tickbox">tickbox</div>
-          <div class="vat">vat number</div>
-        </li>
-        <li>
-          <div class="company">Company 3</div>
-          <div class="tickbox">tickbox</div>
-          <div class="vat">vat number</div>
-        </li>
-      </ul>
-    </div>
-    <div class="section section__supplier">
-      <div class="supplier-name">
-        <p>Supplier:</p>
-        <p>Supplier Name</p>
-      </div>
-      <div class="supplier-address">
-        <p>Address:</p>
-        <p>Supplier Address</p>
-      </div>
-    </div>
-    <div class="supplier-code">
-      <p>Supplier Code:</p>
-      <p>Supplier Code</p>
-    </div>
-    <div class="supplier-date">
-      <p>Date:</p>
-      <p>date</p>
-    </div>
-    <div class="supplier-order">
-      <p>Order:</p>
-      <p>Order number??</p>
-    </div>
-    <div class="section section__po-entry-lines">
-      <div class="po-entry-lines__header">
-        <div class="po-entry-lines__header--product">Product</div>
-        <div class="po-entry-lines__header--supplier-ref">Supplier Ref</div>
-        <div class="po-entry-lines__header--quantity">Quantity</div>
-        <div class="po-entry-lines__header--unit-price">Unit Price</div>
-        <div class="po-entry-lines__header--total-price">Total Price</div>
-      </div>
-      <ul>
-        <li class="entry-line">
-          <div class="entry-line--product"></div>
-          <div class="entry-line--supplier-ref"></div>
-          <div class="entry-line--quantity"></div>
-          <div class="entry-line--unit-price"></div>
-          <div class="entry-line--total-price"></div>
-        </li>
-        <li class="entry-line">
-          <div class="entry-line--product"></div>
-          <div class="entry-line--supplier-ref"></div>
-          <div class="entry-line--quantity"></div>
-          <div class="entry-line--unit-price"></div>
-          <div class="entry-line--total-price"></div>
-        </li>
-        <li class="entry-line">
-          <div class="entry-line--product"></div>
-          <div class="entry-line--supplier-ref"></div>
-          <div class="entry-line--quantity"></div>
-          <div class="entry-line--unit-price"></div>
-          <div class="entry-line--total-price"></div>
-        </li>
-      </ul>
-    </div>
-    <div class="section section__bottom-info">
-      <div class="delivery-date">
-        <p>Delivery Date:</p>
-        <p>Date of delivery</p>
-      </div>
-      <div class="payment-terms">
-        <p>Payment Terms:</p>
-        <p>terms of payment</p>
-      </div>
-      <div class="other-remarks">
-        <p>Other Remarks:</p>
-        <p>remarks</p>
-      </div>
-      <div class="discount">
-        <p>Discount:</p>
-        <p>discount</p>
-      </div>
-      <div class="net-total-value">
-        <p>Net Total Value:</p>
-        <p>net value</p>
-      </div>
-      <div class="price-includes-vat">
-        <p>Price Includes VAT:</p>
-        <div class="price-includes-vat--checkbox"></div>
-      </div>
-    </div>
-    <footer class="footer">
-      <div class="conditions">
-        <div class="conditions-header"><p>Conditions:</p></div>
+      </header>
+      <div class="section section__title">Purchase Order</div>
+      <div class="section section__company-list">
         <ul>
           <li>
-            <p>Condition 1</p>
+            <div class="company">Company 1</div>
+            <div class="tickbox">tickbox</div>
+            <div class="vat">vat number</div>
           </li>
           <li>
-            <p>Condition 2</p>
+            <div class="company">Company 2</div>
+            <div class="tickbox">tickbox</div>
+            <div class="vat">vat number</div>
           </li>
           <li>
-            <p>Condition 3</p>
-          </li>
-          <li>
-            <p>Condition 4</p>
+            <div class="company">Company 3</div>
+            <div class="tickbox">tickbox</div>
+            <div class="vat">vat number</div>
           </li>
         </ul>
       </div>
-      <div class="signature">
-        <p>signature</p>
-        <p>Authorised Signature</p>
+      <div class="section section__supplier">
+        <div class="supplier-name">
+          <p>Supplier:</p>
+          <p>Supplier Name</p>
+        </div>
+        <div class="supplier-address">
+          <p>Address:</p>
+          <p>Supplier Address</p>
+        </div>
       </div>
-    </footer>
+      <div class="supplier-code">
+        <p>Supplier Code:</p>
+        <p>Supplier Code</p>
+      </div>
+      <div class="supplier-date">
+        <p>Date:</p>
+        <p>date</p>
+      </div>
+      <div class="supplier-order">
+        <p>Order:</p>
+        <p>Order number??</p>
+      </div>
+      <div class="section section__po-entry-lines">
+        <div class="po-entry-lines__header">
+          <div class="po-entry-lines__header--product">Product</div>
+          <div class="po-entry-lines__header--supplier-ref">Supplier Ref</div>
+          <div class="po-entry-lines__header--quantity">Quantity</div>
+          <div class="po-entry-lines__header--unit-price">Unit Price</div>
+          <div class="po-entry-lines__header--total-price">Total Price</div>
+        </div>
+        <ul>
+          <li class="entry-line">
+            <div class="entry-line--product"></div>
+            <div class="entry-line--supplier-ref"></div>
+            <div class="entry-line--quantity"></div>
+            <div class="entry-line--unit-price"></div>
+            <div class="entry-line--total-price"></div>
+          </li>
+          <li class="entry-line">
+            <div class="entry-line--product"></div>
+            <div class="entry-line--supplier-ref"></div>
+            <div class="entry-line--quantity"></div>
+            <div class="entry-line--unit-price"></div>
+            <div class="entry-line--total-price"></div>
+          </li>
+          <li class="entry-line">
+            <div class="entry-line--product"></div>
+            <div class="entry-line--supplier-ref"></div>
+            <div class="entry-line--quantity"></div>
+            <div class="entry-line--unit-price"></div>
+            <div class="entry-line--total-price"></div>
+          </li>
+        </ul>
+      </div>
+      <div class="section section__bottom-info">
+        <div class="delivery-date">
+          <p>Delivery Date:</p>
+          <p>Date of delivery</p>
+        </div>
+        <div class="payment-terms">
+          <p>Payment Terms:</p>
+          <p>terms of payment</p>
+        </div>
+        <div class="other-remarks">
+          <p>Other Remarks:</p>
+          <p>remarks</p>
+        </div>
+        <div class="discount">
+          <p>Discount:</p>
+          <p>discount</p>
+        </div>
+        <div class="net-total-value">
+          <p>Net Total Value:</p>
+          <p>net value</p>
+        </div>
+        <div class="price-includes-vat">
+          <p>Price Includes VAT:</p>
+          <div class="price-includes-vat--checkbox"></div>
+        </div>
+      </div>
+      <footer class="footer">
+        <div class="conditions">
+          <div class="conditions-header"><p>Conditions:</p></div>
+          <ul>
+            <li>
+              <p>Condition 1</p>
+            </li>
+            <li>
+              <p>Condition 2</p>
+            </li>
+            <li>
+              <p>Condition 3</p>
+            </li>
+            <li>
+              <p>Condition 4</p>
+            </li>
+          </ul>
+        </div>
+        <div class="signature">
+          <p>signature</p>
+          <p>Authorised Signature</p>
+        </div>
+      </footer>
+    </div>
   </body>
 </html>
