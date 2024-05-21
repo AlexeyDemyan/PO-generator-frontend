@@ -130,6 +130,16 @@ header {
 .section__bottom-info div {
   display: flex;
   flex-direction: row;
+  align-items: end;
+}
+
+.section__bottom-info div:first-child {
+  width: 160px;
+}
+
+.section__bottom-info div:nth-child(2) {
+  width: 400px;
+  border-bottom: 1px solid black;
 }
 
 /* Footer */
@@ -138,4 +148,19 @@ footer {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+}
+
+footer .conditions-header {
+  margin-top: 20px;
+}
+
+footer .signature {
+  padding-top: 100px;
+}
+
+footer .signature-text {
+  text-align: center;
+  width: 300px;
+  border-top: 1px solid black;
+  padding-top: 30px;
 }
