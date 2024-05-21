@@ -15,31 +15,31 @@
   <body>
     <div class="container">
       <header class="header">
-          <div class="header__logo">Logo</div>
-          <div class="header__company">Company Name</div>
-          <div class="header__address">
-            <p>Street</p>
-            <p>City/Post Code</p>
-            <p>Malta</p>
-            <p>Telephone</p>
-          </div>
+        <div class="header__logo">Logo</div>
+        <div class="header__company">Company Name</div>
+        <div class="header__address">
+          <p>Street</p>
+          <p>City/Post Code</p>
+          <p>Malta</p>
+          <p>Telephone</p>
+        </div>
       </header>
       <div class="section section__title">Purchase Order</div>
       <div class="section section__company-list">
         <ul>
           <li>
             <div class="company">Company 1</div>
-            <div class="tickbox">tickbox</div>
+            <div class="tickbox"></div>
             <div class="vat">vat number</div>
           </li>
           <li>
             <div class="company">Company 2</div>
-            <div class="tickbox">tickbox</div>
+            <div class="tickbox"></div>
             <div class="vat">vat number</div>
           </li>
           <li>
             <div class="company">Company 3</div>
-            <div class="tickbox">tickbox</div>
+            <div class="tickbox"></div>
             <div class="vat">vat number</div>
           </li>
         </ul>
@@ -53,50 +53,43 @@
           <p>Address:</p>
           <p>Supplier Address</p>
         </div>
-      </div>
-      <div class="supplier-code">
-        <p>Supplier Code:</p>
-        <p>Supplier Code</p>
-      </div>
-      <div class="supplier-date">
-        <p>Date:</p>
-        <p>date</p>
-      </div>
-      <div class="supplier-order">
-        <p>Order:</p>
-        <p>Order number??</p>
+        <div class="supplier-code">
+          <p>Supplier Code:</p>
+          <p>Supplier Code</p>
+        </div>
+        <div class="supplier-date">
+          <p>Date:</p>
+          <p>date</p>
+        </div>
+        <div class="supplier-order">
+          <p>Order:</p>
+          <p>Order number??</p>
+        </div>
       </div>
       <div class="section section__po-entry-lines">
-        <div class="po-entry-lines__header">
-          <div class="po-entry-lines__header--product">Product</div>
-          <div class="po-entry-lines__header--supplier-ref">Supplier Ref</div>
-          <div class="po-entry-lines__header--quantity">Quantity</div>
-          <div class="po-entry-lines__header--unit-price">Unit Price</div>
-          <div class="po-entry-lines__header--total-price">Total Price</div>
-        </div>
-        <ul>
-          <li class="entry-line">
-            <div class="entry-line--product"></div>
-            <div class="entry-line--supplier-ref"></div>
-            <div class="entry-line--quantity"></div>
-            <div class="entry-line--unit-price"></div>
-            <div class="entry-line--total-price"></div>
-          </li>
-          <li class="entry-line">
-            <div class="entry-line--product"></div>
-            <div class="entry-line--supplier-ref"></div>
-            <div class="entry-line--quantity"></div>
-            <div class="entry-line--unit-price"></div>
-            <div class="entry-line--total-price"></div>
-          </li>
-          <li class="entry-line">
-            <div class="entry-line--product"></div>
-            <div class="entry-line--supplier-ref"></div>
-            <div class="entry-line--quantity"></div>
-            <div class="entry-line--unit-price"></div>
-            <div class="entry-line--total-price"></div>
-          </li>
-        </ul>
+        <table>
+          <tr>
+            <th>Product</th>
+            <th>Supplier Ref</th>
+            <th>Quantity</th>
+            <th>Unit Price</th>
+            <th>Total Price</th>
+          </tr>
+          <tr>
+            <td>bolts</td>
+            <td>blt001</td>
+            <td>1</td>
+            <td>6</td>
+            <td>6</td>
+          </tr>
+          <tr>
+            <td>rivets</td>
+            <td>rvt001</td>
+            <td>5</td>
+            <td>2</td>
+            <td>10</td>
+          </tr>
+        </table>
       </div>
       <div class="section section__bottom-info">
         <div class="delivery-date">

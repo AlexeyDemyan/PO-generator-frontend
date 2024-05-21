@@ -56,7 +56,50 @@ header {
 }
 
 .section__company-list ul li {
+  text-align: center;
   display: flex;
-  align-items: center;
-  align-content: space-between;
+  justify-content: space-around;
+}
+
+.tickbox {
+  height: 10px;
+  width: 10px;
+  border: 2px solid black;
+}
+
+/* Supplier Section */
+
+.section__supplier {
+  display: grid;
+  grid-template-columns: 500px 500px;
+  grid-template-rows: 50px 50px 50px;
+  grid-template-areas:
+    "supplier-name supplier-code"
+    "supplier-address supplier-date"
+    "supplier-address supplier-order";
+}
+
+.section__supplier div {
+  display: flex;
+  flex-direction: row;
+}
+
+.supplier-name {
+  grid-area: supplier-name;
+}
+
+.supplier-code {
+  grid-area: supplier-code;
+}
+
+.supplier-address {
+  grid-area: supplier-address;
+}
+
+.supplier-date {
+  grid-area: supplier-date;
+}
+
+.supplier-order {
+  grid-area: supplier-order;
 }
