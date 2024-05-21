@@ -103,3 +103,39 @@ header {
 .supplier-order {
   grid-area: supplier-order;
 }
+
+/* PO Entry Lines */
+
+.section__po-entry-lines table th {
+  border: 3px solid black;
+}
+
+.section__po-entry-lines table td {
+  text-align: center;
+  border: 1px solid black;
+}
+
+/* Bottom Info */
+
+.section__bottom-info {
+  display: grid;
+  grid-template-columns: 500px 500px;
+  grid-template-rows: 50px 50px 50px;
+  grid-template-areas:
+    "delivery-date discount"
+    "payment-terms net-total-value"
+    "other-remarks price-includes-vat";
+}
+
+.section__bottom-info div {
+  display: flex;
+  flex-direction: row;
+}
+
+/* Footer */
+
+footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
