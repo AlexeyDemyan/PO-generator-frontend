@@ -6,10 +6,11 @@ body {
 }
 
 .container {
-  width: 95%;
+  width: 950px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
+  size: 7in 9.25in;
 }
 
 header,
@@ -47,6 +48,9 @@ header {
 
 .section__title {
   text-align: center;
+  font-weight: 700;
+  font-size: 26px;
+  margin-top: 20px;
 }
 
 /* Company List */
@@ -58,7 +62,12 @@ header {
 .section__company-list ul li {
   text-align: center;
   display: flex;
-  justify-content: space-around;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.section__company-list ul li div {
+  margin-right: 20px;
 }
 
 .tickbox {
@@ -73,44 +82,44 @@ header {
   display: grid;
   grid-template-columns: 500px 500px;
   grid-template-rows: 50px 50px 50px;
-  grid-template-areas:
-    "supplier-name supplier-code"
-    "supplier-address supplier-date"
-    "supplier-address supplier-order";
+  margin-bottom: 20px;
 }
 
 .section__supplier div {
   display: flex;
   flex-direction: row;
+  align-items: end;
 }
 
-.supplier-name {
-  grid-area: supplier-name;
+.supplier-name--title,
+.supplier-address--title,
+.supplier-code--title,
+.supplier-date--title,
+.supplier-order--title {
+  width: 140px;
 }
 
-.supplier-code {
-  grid-area: supplier-code;
-}
-
-.supplier-address {
-  grid-area: supplier-address;
-}
-
-.supplier-date {
-  grid-area: supplier-date;
-}
-
-.supplier-order {
-  grid-area: supplier-order;
+.supplier-name--text,
+.supplier-address--text,
+.supplier-code--text,
+.supplier-date--text,
+.supplier-order--text {
+  width: 300px;
+  border-bottom: 1px solid black;
 }
 
 /* PO Entry Lines */
+
+.section__po-entry-lines table {
+  border-collapse: collapse;
+}
 
 .section__po-entry-lines table th {
   border: 3px solid black;
 }
 
 .section__po-entry-lines table td {
+  height: 25px;
   text-align: center;
   border: 1px solid black;
 }
@@ -121,10 +130,6 @@ header {
   display: grid;
   grid-template-columns: 500px 500px;
   grid-template-rows: 50px 50px 50px;
-  grid-template-areas:
-    "delivery-date discount"
-    "payment-terms net-total-value"
-    "other-remarks price-includes-vat";
 }
 
 .section__bottom-info div {
@@ -133,12 +138,23 @@ header {
   align-items: end;
 }
 
-.section__bottom-info div:first-child {
-  width: 160px;
+.delivery-date--title,
+.discount--title,
+.payment-terms--title,
+.net-total-value--title,
+.other-remarks--title,
+.price-includes-vat--title {
+  width: 140px;
 }
 
-.section__bottom-info div:nth-child(2) {
-  width: 400px;
+
+.delivery-date--text,
+.discount--text,
+.payment-terms--text,
+.net-total-value--text,
+.other-remarks--text,
+.price-includes-vat--text {
+  width: 300px;
   border-bottom: 1px solid black;
 }
 
@@ -152,6 +168,8 @@ footer {
 
 footer .conditions-header {
   margin-top: 20px;
+  height: 20px;
+  font-weight: 600;
 }
 
 footer .signature {
