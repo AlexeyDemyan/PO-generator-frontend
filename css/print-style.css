@@ -21,7 +21,7 @@ div {
 
 /* Header */
 
-header {
+.header {
   width: 200px;
   align-self: center;
   display: grid;
@@ -36,12 +36,22 @@ header {
   grid-area: header__logo;
 }
 
+.header__logo img {
+  height: 150px;
+  margin-left: 20px;
+}
+
 .header__address {
   grid-area: header__address;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
 }
 
 .header__company {
   grid-area: header__company;
+  font-weight: 600;
+  font-size: 23px;
 }
 
 /* Title */
