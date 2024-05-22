@@ -25,7 +25,7 @@ header {
   width: 200px;
   align-self: center;
   display: grid;
-  grid-template-columns: 100px 200px;
+  grid-template-columns: 200px 300px;
   grid-template-rows: 160px 40px;
   grid-template-areas:
     "header__logo header__address"
@@ -68,6 +68,11 @@ header {
 
 .section__company-list ul li div {
   margin-right: 20px;
+}
+
+.section__company-list ul li .company {
+  width: 380px;
+  text-align: left;
 }
 
 .tickbox {
