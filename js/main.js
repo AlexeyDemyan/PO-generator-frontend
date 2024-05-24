@@ -3,7 +3,7 @@ import { renderPoEntry } from "./POEntry.js";
 import { renderOrderLine } from "./order-line.js";
 import { createOrderLineDTO } from "./order-line-dto.js";
 import { renderUsers } from "./render-users.js";
-// import { previewPrint } from "./preview-print.js";
+import { previewPrint } from "./preview-print.js";
 
 const bodyElement = document.querySelector("body");
 const poSendForm = bodyElement.querySelector(".po-send-form");
@@ -12,8 +12,9 @@ const poEntriesListElement = bodyElement.querySelector(".po-entries-list");
 const addNewLineButton = bodyElement.querySelector(".add-new-line-button");
 
 const modalElement = bodyElement.querySelector(".modal");
+const modalOrderNumberElement = modalElement.querySelector('.modal-order-number');
 const closeButton = modalElement.querySelector(".close");
-// const modalPrintButton = modalElement.querySelector(".modal-print");
+const modalPrintButton = modalElement.querySelector(".modal-print");
 
 let orderLinesRenderedAmount = 0;
 const maxOrderLinesRenderedAmount = 10;
@@ -36,9 +37,10 @@ document.addEventListener("keydown", (evt) => {
   }
 });
 
-// modalPrintButton.addEventListener("click", () => {
-//   window.print();
-// });
+modalPrintButton.addEventListener("click", () => {
+  const oderNumberFromDataset = modalOrderNumberElement.dataset.orderNumber;
+  previewPrint(oderNumberFromDataset)
+});
 
 poSendForm.addEventListener("submit", (evt) => {
   evt.preventDefault();
@@ -60,9 +62,7 @@ poSendForm.addEventListener("submit", (evt) => {
 
       getData(
         (data) => {
-          // console.log(data[5]);
           data.forEach((entry) => {
-            //console.log(entry.user);
             renderPoEntry(entry);
           });
         },
@@ -82,7 +82,6 @@ console.log("attempting to fetch data...");
 
 getData(
   (data) => {
-    // console.log(data[5]);
     data.forEach((entry) => {
       renderPoEntry(entry);
     });

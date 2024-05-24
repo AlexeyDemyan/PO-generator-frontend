@@ -18,6 +18,7 @@ const modalPriceIncludesVatElement = modalElement.querySelector('.modal-price-in
 
 export const renderModal = (poEntry) => {
   modalOrderNumberElement.innerText = `Order Number: ${poEntry.orderNumber}`;
+  modalOrderNumberElement.dataset.orderNumber = poEntry.orderNumber;
   modalUserElement.innerText = poEntry.user;
   modalCompanyElement.innerText = poEntry.company;
   modalDateElement.innerText = poEntry.date;
