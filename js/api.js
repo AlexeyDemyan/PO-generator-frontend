@@ -26,4 +26,15 @@ const getData = (onSuccess, onFail) => {
     .catch((err) => {onFail(err);});
 };
 
-export { getData, sendData };
+const getUsers = (onSuccess, onFail) => {
+  fetch('http://localhost:3333/users')
+    .then((response) => {
+      if (response.ok) {
+        return response.json();
+      }
+      throw new Error(`${response.status} ${response.statusText}`);
+    })
+    .then((data) => {onSuccess(data);})
+    .catch((err) => {onFail(err);});
+};
+export { getData, sendData, getUsers };

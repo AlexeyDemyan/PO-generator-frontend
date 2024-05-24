@@ -1,8 +1,9 @@
-import { getData, sendData } from "./api.js";
+import { getData, sendData, getUsers } from "./api.js";
 import { renderPoEntry } from "./POEntry.js";
 import { renderOrderLine } from "./order-line.js";
 import { createOrderLineDTO } from "./order-line-dto.js";
-import { previewPrint } from "./preview-print.js";
+import { renderUsers } from "./render-users.js";
+// import { previewPrint } from "./preview-print.js";
 
 const bodyElement = document.querySelector("body");
 const poSendForm = bodyElement.querySelector(".po-send-form");
@@ -13,7 +14,6 @@ const addNewLineButton = bodyElement.querySelector(".add-new-line-button");
 const modalElement = bodyElement.querySelector(".modal");
 const closeButton = modalElement.querySelector(".close");
 // const modalPrintButton = modalElement.querySelector(".modal-print");
-const testButton = bodyElement.querySelector(".test-button");
 
 let orderLinesRenderedAmount = 0;
 const maxOrderLinesRenderedAmount = 10;
@@ -35,10 +35,6 @@ document.addEventListener("keydown", (evt) => {
     modalElement.style.display = "none";
   }
 });
-
-testButton.addEventListener('click', () => {
-  previewPrint();
-})
 
 // modalPrintButton.addEventListener("click", () => {
 //   window.print();
@@ -96,3 +92,12 @@ getData(
     console.log(`${error} - Unable to load data`);
   }
 );
+
+getUsers(
+  (data) => {
+    renderUsers(data);
+  },
+  (error) => {
+    console.log(`${error} - Unable to load users`);
+  }
+)
