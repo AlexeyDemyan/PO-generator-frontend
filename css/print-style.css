@@ -74,6 +74,7 @@ div {
   display: flex;
   justify-content: flex-start;
   align-items: center;
+  margin-bottom: 10px;
 }
 
 .section__company-list ul li div {
@@ -86,8 +87,8 @@ div {
 }
 
 .tickbox {
-  height: 10px;
-  width: 10px;
+  height: 20px;
+  width: 20px;
   border: 2px solid black;
 }
 
