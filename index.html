@@ -59,51 +59,81 @@
                 <div class="form-content">
 
                   <form action="/form" method="POST" class="po-send-form">
-                    <label for="user">User:</label>
-                    <select class="users-list" id="user" name="user">
-                    </select>
-                    <label for="company">Company:</label>
-                    <select id="company" name="company">
-                      <option value="Marsovin Winery Ltd">Marsovin Winery Ltd</option>
-                      <option value="CassarCamilleri Marketing, Sales & Distribution Ltd">CassarCamilleri Marketing, Sales & Distribution Ltd</option>
-                      <option value="Marsovin Viticulture Ltd">Marsovin Viticulture Ltd</option>
-                    </select>
-                    <label for="date">Date:</label>
-                    <input name="date" type="date">
-                    <label for="supplier">Supplier:</label>
-                    <input name="supplier" type="text">
-                    <label for="supplierAddress">Supplier Address:</label>
-                    <input name="supplierAddress" type="text">
-                    <label for="supplierCode">Supplier Code:</label>
-                    <input name="supplierCode" type="text">
-                    <label for="deliveryDate">Delivery Date:</label>
-                    <input name="deliveryDate" type="date">
-                    <label for="order">Order:</label>
-                    <input name="order" type="text">
-                    <label for="order_lines"><h2>Order Lines</h2></label>
-                    <div class="order_lines-header">
-                    <p>Product</p>
-                    <p>Supplier Ref.</p>
-                    <p>Quantity</p>
-                    <p>Unit Price</p>
-                    <p>Total Price</p>
+                    <div class="po-send-form--user">
+                      <label for="user">User:</label>
+                      <select class="users-list" id="user" name="user">
+                      </select>
                     </div>
-                    <ul name="order_lines" class="order_lines">
-                    </ul>
-                    <button class="add-new-line-button standard-button">Add New Line</button>
-                    <label for="paymentTerms">Payment Terms:</label>
-                    <input name="paymentTerms" type="text">
-                    <label for="otherRemarks">Other Remarks:</label>
-                    <input name="otherRemarks" type="text">
-                    <label for="discount">Discount:</label>
-                    <input name="discount" type="number">
-                    <label for="netTotalValue">Net Total Value:</label>
-                    <input name="netTotalValue" type="number">
-                    <label for="priceIncludesVat">Price Includes VAT:</label>
-                    <select id="priceIncludesVat" name="priceIncludesVat">
-                      <option value="Yes">Yes</option>
-                      <option value="No">No</option>
-                    </select>
+                    <div class="po-send-form--company">
+                      <label for="company">Company:</label>
+                      <select id="company" name="company">
+                        <option value="Marsovin Winery Ltd">Marsovin Winery Ltd</option>
+                        <option value="CassarCamilleri Marketing, Sales & Distribution Ltd">CassarCamilleri Marketing, Sales & Distribution Ltd</option>
+                        <option value="Marsovin Viticulture Ltd">Marsovin Viticulture Ltd</option>
+                      </select>
+                    </div>
+                    <div class="po-send-form--date">
+                      <label for="date">Date:</label>
+                      <input name="date" type="date">
+                    </div>
+                    <div class="po-send-form--supplier">
+                      <label for="supplier">Supplier:</label>
+                      <input name="supplier" type="text">
+                    </div>
+                    <div class="po-send-form--supplierAddress">
+                      <label for="supplierAddress">Supplier Address:</label>
+                      <input name="supplierAddress" type="text">
+                    </div>
+                    <div class="po-send-form--supplierCode">
+                      <label for="supplierCode">Supplier Code:</label>
+                      <input name="supplierCode" type="text">
+                    </div>
+                    <div class="po-send-form--deliveryDate">
+                      <label for="deliveryDate">Delivery Date:</label>
+                      <input name="deliveryDate" type="date">
+                    </div>
+                    <div class="po-send-form--order">
+                      <label for="order">Order:</label>
+                      <input name="order" type="text">
+                    </div>
+                    <div class="po-send-form--order-lines">
+                      <label for="order_lines"><h2>Order Lines</h2></label>
+                      <div class="order_lines-header">
+                      <p>Product</p>
+                      <p>Supplier Ref.</p>
+                      <p>Quantity</p>
+                      <p>Unit Price</p>
+                      <p>Total Price</p>
+                      </div>
+                      <ul name="order_lines" class="order_lines">
+                      </ul>
+                      <button class="add-new-line-button standard-button">Add New Line</button>
+                    </div>
+                    <div class="po-send-form--paymentTerms">
+                      <label for="paymentTerms">Payment Terms:</label>
+                      <input name="paymentTerms" type="text">
+                    </div>
+                    <div class="po-send-form--otherRemarks">
+                      <label for="otherRemarks">Other Remarks:</label>
+                      <input name="otherRemarks" type="text">
+                    </div>
+                    <div class="po-send-form--discount">
+                      <label for="discount">Discount:</label>
+                      <input name="discount" type="number">
+                    </div>
+                    <div class="po-send-form--netTotalValue">
+                      <label for="netTotalValue">Net Total Value:</label>
+                      <input name="netTotalValue" type="number">
+                    </div>
+                    <div class="po-send-form--priceIncludesVat">
+                      <label for="priceIncludesVat">Price Includes VAT:</label>
+                      <select id="priceIncludesVat" name="priceIncludesVat">
+                        <option value="Yes">Yes</option>
+                        <option value="No">No</option>
+                      </select>
+                    </div>
+                    <!-- <div class="po-send-form--submit-button">
+                    </div> -->
                     <input class="standard-button" type="submit" value="Submit PO">
                   </form>
                 </div>
