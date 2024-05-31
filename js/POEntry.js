@@ -7,10 +7,11 @@ export const renderPoEntry = (poEntry) => {
   const poEntryListItem = document.createElement("li");
 
   poEntryListItem.innerHTML = `
-  <p>${poEntry.orderNumber}</p>
-  <p>${poEntry.user}</p>
-  <p>${poEntry.company}</p>
-  <p>${poEntry.supplier}</p>`;
+  <div class="po-entries-list--number">${poEntry.orderNumber}</div>
+  <div class="po-entries-list--date">${poEntry.date}</div>
+  <div class="po-entries-list--user">${poEntry.user}</div>
+  <div class="po-entries-list--company">${poEntry.company}</div>
+  <div class="po-entries-list--supplier">${poEntry.supplier}</div>`;
 
   poEntryListItem.addEventListener("click", () => {
     renderModal(poEntry);

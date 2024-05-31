@@ -169,13 +169,44 @@ label {
   border-bottom: 5px solid black;
 }
 
+.po-entries-list {
+  padding-left: 0;
+}
+
 .po-entries-list li {
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  align-items: center;
   border: 5px solid black;
+  min-height: 50px;
+  height: auto;
+  padding: 5px;
+}
+
+.po-entries-list li div {
+  text-align: center;
 }
 
 .po-entries-list li:hover {
   cursor: pointer;
+}
+
+.po-entries-list--number {
+  width: 20%;
+}
+
+.po-entries-list--date {
+  width: 20%;
+}
+
+.po-entries-list--user {
+  width: 20%;
+}
+
+.po-entries-list--company {
+  width: 20%;
+}
+
+.po-entries-list--supplier {
+  width: 20%;
 }

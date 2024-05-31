@@ -8,7 +8,7 @@ const sendData = (onSuccess, onFail, formData) => {
       body: formData
     })
     .then((response) => {
-      if (response.ok) {onSuccess();}
+      if (response.ok) {onSuccess()}
       else {onFail();}
     })
     .catch(() => {onFail();});
