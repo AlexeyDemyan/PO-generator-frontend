@@ -16,18 +16,28 @@ const modalDiscountElement = modalElement.querySelector('.modal-discount');
 const modalNetTotalValueElement = modalElement.querySelector('.modal-net-total-value');
 const modalPriceIncludesVatElement = modalElement.querySelector('.modal-price-includes-vat');
 
+const createOrderItemsTruncatedPreview = (orderLines) => {
+  let productNamesList = [];
+
+  orderLines.forEach((line) => {
+    productNamesList.push(line.product)
+  });
+
+  return `${productNamesList.join(', ').slice(0, 50)} ...`
+}
+
 export const renderModal = (poEntry) => {
-  modalOrderNumberElement.innerText = `Order Number: ${poEntry.orderNumber}`;
+  modalOrderNumberElement.innerText = `${new Date(poEntry.createdAt).getFullYear()}-${poEntry.orderNumber}`;
   modalOrderNumberElement.dataset.orderNumber = poEntry.orderNumber;
   modalUserElement.innerText = poEntry.user;
   modalCompanyElement.innerText = poEntry.company;
-  modalDateElement.innerText = poEntry.date;
+  modalDateElement.innerText = `${poEntry.date ? new Date(poEntry.date).toLocaleDateString() : ""}`;
   modalSupplierElement.innerText = poEntry.supplier;
   modalSupplierAddressElement.innerText = poEntry.supplierAddress;
   modalSupplierCodeElement.innerText = poEntry.supplierCode;
-  modalDeliveryDateElement.innerText = poEntry.deliveryDate;
+  modalDeliveryDateElement.innerText = `${poEntry.date ? new Date(poEntry.deliveryDate).toLocaleDateString() : ""}`;
   modalOrderElement.innerText = poEntry.order;
-  modalOrderLinesElement.innerText = poEntry.orderLines;
+  modalOrderLinesElement.innerText = createOrderItemsTruncatedPreview(poEntry.orderLines);
   modalPaymentTermsElement.innerText = poEntry.paymentTerms;
   modalOtherRemarksElement.innerText = poEntry.otherRemarks;
   modalDiscountElement.innerText = poEntry.discount;

@@ -73,8 +73,23 @@ select {
   width: 80%;
 }
 
-.modal-content p {
+.modal-content {
   color: #1f2937;
+}
+
+.modal-content ul {
+  list-style-type: none;
+}
+
+.modal-content ul li {
+  display: flex;
+  flex-direction: row;
+  margin:10px;
+}
+
+.modal-content--left-column {
+  min-width: 230px;
+  font-weight: 600;
 }
 
 /* The Close Button */
