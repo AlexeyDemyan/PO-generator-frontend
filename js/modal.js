@@ -43,7 +43,3 @@ export const renderModal = (poEntry) => {
   modalPriceIncludesVatElement.innerText = poEntry.priceIncludesVat;
   modalElement.style.display = 'block';
 };
-
-export const printModal = () => {
-
-}

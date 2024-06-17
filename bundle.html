@@ -437,147 +437,118 @@ label {
         </div>
       </section>
 
-    <script>
-      const previewPrint = (orderNumber) => {
-  fetch(`http://34.154.93.127:3333/po_entries/print${orderNumber}`)
-    .then((response) => {
-      if (response.ok) {
-        window.open(
-          `http://34.154.93.127:3333/po_entries/print${orderNumber}`,
-          "_blank"
-        );
-        return response;
-      }
-      throw new Error(`${response.status} ${response.statusText}`);
-    })
-    .then((data) => console.log(data))
-    .catch((err) => {
-      console.log(err);
-    });
-};
-
-const bodyElement = document.querySelector("body");
-const poSendForm = bodyElement.querySelector(".po-send-form");
-const poEntriesListElement = bodyElement.querySelector(".po-entries-list");
-const addNewLineButton = bodyElement.querySelector(".add-new-line-button");
-const modalElement = bodyElement.querySelector(".modal");
-const modalOrderNumberElement = modalElement.querySelector(
-  ".modal-order-number"
-);
-const closeButton = modalElement.querySelector(".close");
-const modalPrintButton = modalElement.querySelector(".modal-print");
-const modalUserElement = modalElement.querySelector(".modal-user");
-const modalCompanyElement = modalElement.querySelector(".modal-company");
-const modalDateElement = modalElement.querySelector(".modal-date");
-const modalSupplierElement = modalElement.querySelector(".modal-supplier");
-const modalSupplierAddressElement = modalElement.querySelector(
-  ".modal-supplier-address"
-);
-const modalSupplierCodeElement = modalElement.querySelector(
-  ".modal-supplier-code"
-);
-const modalDeliveryDateElement = modalElement.querySelector(
-  ".modal-delivery-date"
-);
-const modalOrderElement = modalElement.querySelector(".modal-order");
-const modalOrderLinesElement = modalElement.querySelector(".modal-order-lines");
-const modalPaymentTermsElement = modalElement.querySelector(
-  ".modal-payment-terms"
-);
-const modalOtherRemarksElement = modalElement.querySelector(
-  ".modal-other-remarks"
-);
-const modalDiscountElement = modalElement.querySelector(".modal-discount");
-const modalNetTotalValueElement = modalElement.querySelector(
-  ".modal-net-total-value"
-);
-const modalPriceIncludesVatElement = modalElement.querySelector(
-  ".modal-price-includes-vat"
-);
-const formElement = bodyElement.querySelector(".po-send-form");
-const orderLinesList = formElement.querySelector(".order_lines");
-
+      <script>
 const sendData = (onSuccess, onFail, formData) => {
-  fetch("http://34.154.93.127:3333/po_entries", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: formData,
-  })
-    .then((response) => {
-      if (response.ok) {
-        onSuccess();
-      } else {
-        onFail();
-      }
+  fetch('http://localhost:3333/po_entries',
+    {
+      method: 'POST',
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: formData
     })
-    .catch(() => {
-      onFail();
-    });
+    .then((response) => {
+      if (response.ok) {onSuccess()}
+      else {onFail();}
+    })
+    .catch(() => {onFail();});
 };
 
 const getData = (onSuccess, onFail) => {
-  fetch("http://34.154.93.127:3333/po_entries")
+  fetch('http://localhost:3333/po_entries')
     .then((response) => {
       if (response.ok) {
         return response.json();
       }
       throw new Error(`${response.status} ${response.statusText}`);
     })
-    .then((data) => {
-      onSuccess(data);
-    })
-    .catch((err) => {
-      onFail(err);
-    });
+    .then((data) => {onSuccess(data);})
+    .catch((err) => {onFail(err);});
 };
 
 const getUsers = (onSuccess, onFail) => {
-  fetch("http://34.154.93.127:3333/users")
+  fetch('http://localhost:3333/users')
     .then((response) => {
       if (response.ok) {
         return response.json();
       }
       throw new Error(`${response.status} ${response.statusText}`);
     })
-    .then((data) => {
-      onSuccess(data);
-    })
-    .catch((err) => {
-      onFail(err);
-    });
+    .then((data) => {onSuccess(data);})
+    .catch((err) => {onFail(err);});
 };
 
-const renderOrderLine = (
-  orderLinesRenderedAmount,
-  maxOrderLinesRenderedAmount
-) => {
-  if (orderLinesRenderedAmount <= maxOrderLinesRenderedAmount) {
-    const orderLineItem = document.createElement("li");
-    orderLineItem.classList.add("order-line");
-    orderLineItem.classList.add(`order-line-${orderLinesRenderedAmount + 1}`);
-    orderLineItem.innerHTML = `
-  <input class="order-line--product" type="text">
-  <input class="order-line--supplier-ref" type="text">
-  <input class="order-line--quantity" type="text">
-  <input class="order-line--unit-price" type="text">
-  <input class="order-line--total-price" type="text">`;
+const bodyElement = document.querySelector("body");
+const apiModalElement = bodyElement.querySelector(".api-modal");
+const apiModalElementHeader = apiModalElement.querySelector("h1");
+const apiModalElementMessage = apiModalElement.querySelector("p");
+const loadingModalElement = bodyElement.querySelector(".loading-modal");
 
-    orderLinesList.appendChild(orderLineItem);
-  } else {
-    console.log("cannot create more order lines");
-  }
+const showLoadingModal = () => {
+  loadingModalElement.style.display = "block";
 };
+
+const hideLoadingModal = () => {
+  loadingModalElement.style.display = 'none';
+}
+
+const showSuccessMessage = () => {
+  apiModalElementHeader.innerText = "PO Created successfully!";
+  apiModalElementMessage.innerText =
+    "You can open and view it from the list below";
+  apiModalElement.style.display = "block";
+};
+
+const showErrorMessage = (errorMessage) => {
+  apiModalElementHeader.innerText =
+    "Unable to connect to server, please contact IT";
+  apiModalElementMessage.innerText = errorMessage;
+  apiModalElement.style.display = "block";
+};
+
+const modalElement = bodyElement.querySelector(".modal");
+const modalOrderNumberElement = modalElement.querySelector('.modal-order-number');
+const modalUserElement = modalElement.querySelector(".modal-user");
+const modalCompanyElement = modalElement.querySelector(".modal-company");
+const modalDateElement = modalElement.querySelector('.modal-date');
+const modalSupplierElement = modalElement.querySelector(".modal-supplier");
+const modalSupplierAddressElement = modalElement.querySelector('.modal-supplier-address');
+const modalSupplierCodeElement = modalElement.querySelector('.modal-supplier-code');
+const modalDeliveryDateElement = modalElement.querySelector('.modal-delivery-date');
+const modalOrderLinesElement = modalElement.querySelector('.modal-order-lines');
+const modalPaymentTermsElement = modalElement.querySelector('.modal-payment-terms');
+const modalOtherRemarksElement = modalElement.querySelector('.modal-other-remarks');
+const modalDiscountElement = modalElement.querySelector('.modal-discount');
+const modalNetTotalValueElement = modalElement.querySelector('.modal-net-total-value');
+const modalPriceIncludesVatElement = modalElement.querySelector('.modal-price-includes-vat');
 
 const createOrderItemsTruncatedPreview = (orderLines) => {
   let productNamesList = [];
 
   orderLines.forEach((line) => {
-    productNamesList.push(line.product);
+    productNamesList.push(line.product)
   });
 
-  return `${productNamesList.join(", ").slice(0, 50)} ...`;
+  return `${productNamesList.join(', ').slice(0, 50)} ...`
+}
+
+const renderModal = (poEntry) => {
+  modalOrderNumberElement.innerText = `${new Date(poEntry.createdAt).getFullYear()}-${poEntry.orderNumber}`;
+  modalOrderNumberElement.dataset.orderNumber = poEntry.orderNumber;
+  modalUserElement.innerText = poEntry.user;
+  modalCompanyElement.innerText = poEntry.company;
+  modalDateElement.innerText = `${poEntry.date ? new Date(poEntry.date).toLocaleDateString() : ""}`;
+  modalSupplierElement.innerText = poEntry.supplier;
+  modalSupplierAddressElement.innerText = poEntry.supplierAddress;
+  modalSupplierCodeElement.innerText = poEntry.supplierCode;
+  modalDeliveryDateElement.innerText = `${poEntry.date ? new Date(poEntry.deliveryDate).toLocaleDateString() : ""}`;
+  modalOrderLinesElement.innerText = createOrderItemsTruncatedPreview(poEntry.orderLines);
+  modalPaymentTermsElement.innerText = poEntry.paymentTerms;
+  modalOtherRemarksElement.innerText = poEntry.otherRemarks;
+  modalDiscountElement.innerText = poEntry.discount;
+  modalNetTotalValueElement.innerText = poEntry.netTotalValue;
+  modalPriceIncludesVatElement.innerText = poEntry.priceIncludesVat;
+  modalElement.style.display = 'block';
 };
 
 const createOrderLineDTO = () => {
@@ -599,45 +570,51 @@ const createOrderLineDTO = () => {
   return orderLineDTO;
 };
 
-const renderModal = (poEntry) => {
-  modalOrderNumberElement.innerText = `${new Date(
-    poEntry.createdAt
-  ).getFullYear()}-${poEntry.orderNumber}`;
-  modalOrderNumberElement.dataset.orderNumber = poEntry.orderNumber;
-  modalUserElement.innerText = poEntry.user;
-  modalCompanyElement.innerText = poEntry.company;
-  modalDateElement.innerText = `${
-    poEntry.date ? new Date(poEntry.date).toLocaleDateString() : ""
-  }`;
-  modalSupplierElement.innerText = poEntry.supplier;
-  modalSupplierAddressElement.innerText = poEntry.supplierAddress;
-  modalSupplierCodeElement.innerText = poEntry.supplierCode;
-  modalDeliveryDateElement.innerText = `${
-    poEntry.date ? new Date(poEntry.deliveryDate).toLocaleDateString() : ""
-  }`;
-  modalOrderElement.innerText = poEntry.order;
-  modalOrderLinesElement.innerText = createOrderItemsTruncatedPreview(
-    poEntry.orderLines
-  );
-  modalPaymentTermsElement.innerText = poEntry.paymentTerms;
-  modalOtherRemarksElement.innerText = poEntry.otherRemarks;
-  modalDiscountElement.innerText = poEntry.discount;
-  modalNetTotalValueElement.innerText = poEntry.netTotalValue;
-  modalPriceIncludesVatElement.innerText = poEntry.priceIncludesVat;
-  modalElement.style.display = "block";
+const poSendForm = bodyElement.querySelector(".po-send-form");
+const formDiscountElement = poSendForm.querySelector('.discount-input');
+
+const netTotalValueInputElement = poSendForm.querySelector('.netTotalValue-input');
+
+const calculateTotalValue = () => {
+  const totalPriceElements = poSendForm.querySelectorAll('.order-line--total-price');
+  let totalSum = 0;
+  totalPriceElements.forEach((elt) => {totalSum += Number(elt.value)});
+  let totalDiscount = totalSum * Number(formDiscountElement.value) / 100;
+  netTotalValueInputElement.value = (totalSum - totalDiscount).toFixed(2);
+}
+
+const formElement = bodyElement.querySelector(".po-send-form");
+const orderLinesList = formElement.querySelector(".order_lines");
+
+const renderOrderLine = (
+  orderLinesRenderedAmount,
+  maxOrderLinesRenderedAmount
+) => {
+  if (orderLinesRenderedAmount <= maxOrderLinesRenderedAmount) {
+    const orderLineItem = document.createElement("li");
+    orderLineItem.classList.add('order-line');
+    orderLineItem.classList.add(`order-line-${orderLinesRenderedAmount + 1}`);
+    orderLineItem.innerHTML = `
+  <input class="order-line--product" type="text">
+  <input class="order-line--supplier-ref" type="text">
+  <input class="order-line--quantity" type="text">
+  <input class="order-line--unit-price" type="number" step=".01">
+  <input class="order-line--total-price" type="number" step=".01">`;
+
+    orderLinesList.appendChild(orderLineItem);
+    orderLineItem.querySelector('.order-line--total-price').addEventListener('input', calculateTotalValue)
+  }
+  else {console.log('cannot create more order lines')}
 };
-const usersListElement = formElement.querySelector(".users-list");
+
+const poEntriesListElement = bodyElement.querySelector(".po-entries-list");
 
 const renderPoEntry = (poEntry) => {
   const poEntryListItem = document.createElement("li");
 
   poEntryListItem.innerHTML = `
-  <div class="po-entries-list--number">${new Date(
-    poEntry.createdAt
-  ).getFullYear()}-${poEntry.orderNumber}</div>
-  <div class="po-entries-list--date">${
-    poEntry.date ? new Date(poEntry.date).toLocaleDateString() : ""
-  }</div>
+  <div class="po-entries-list--number">${new Date(poEntry.createdAt).getFullYear()}-${poEntry.orderNumber}</div>
+  <div class="po-entries-list--date">${poEntry.date ? new Date(poEntry.date).toLocaleDateString() : ""}</div>
   <div class="po-entries-list--user">${poEntry.user}</div>
   <div class="po-entries-list--company">${poEntry.company}</div>
   <div class="po-entries-list--supplier">${poEntry.supplier}</div>`;
@@ -648,6 +625,41 @@ const renderPoEntry = (poEntry) => {
 
   poEntriesListElement.appendChild(poEntryListItem);
 };
+
+const previewPrint = (orderNumber) => {
+  fetch(`http://localhost:3333/po_entries/print${orderNumber}`)
+    .then((response) => {
+      if (response.ok) {
+        window.open(`http://localhost:3333/po_entries/print${orderNumber}`, "_blank");
+        return response;
+      }
+      showErrorMessage(response.statusText);
+      throw new Error(`${response.status} ${response.statusText}`);
+    })
+    .then((data) => console.log(data))
+    .catch((err) => {
+      showErrorMessage(err)
+      console.log(err);
+    });
+};
+
+const usersListElement = formElement.querySelector(".users-list");
+
+const renderUsers = (users) => {
+  users.forEach((user) => {
+    const optionElement = document.createElement("option");
+    optionElement.value = user.name;
+    optionElement.text = user.name;
+    usersListElement.appendChild(optionElement);
+  });
+};
+
+
+const addNewLineButton = bodyElement.querySelector(".add-new-line-button");
+const closeButton = modalElement.querySelector(".close");
+const modalPrintButton = modalElement.querySelector(".modal-print");
+const apiModalCloseButton = apiModalElement.querySelector(".close");
+const apiModalOkButton = apiModalElement.querySelector(".modal-ok");
 
 let orderLinesRenderedAmount = 0;
 const maxOrderLinesRenderedAmount = 10;
@@ -664,9 +676,18 @@ closeButton.addEventListener("click", () => {
   modalElement.style.display = "none";
 });
 
+apiModalCloseButton.addEventListener("click", () => {
+  apiModalElement.style.display = "none";
+});
+
+apiModalOkButton.addEventListener("click", () => {
+  apiModalElement.style.display = "none";
+});
+
 document.addEventListener("keydown", (evt) => {
   if (evt.key === "Escape") {
     modalElement.style.display = "none";
+    apiModalElement.style.display = "none";
   }
 });
 
@@ -677,6 +698,8 @@ modalPrintButton.addEventListener("click", () => {
 
 poSendForm.addEventListener("submit", (evt) => {
   evt.preventDefault();
+
+  showLoadingModal();
 
   const formData = new FormData(evt.target);
 
@@ -689,60 +712,68 @@ poSendForm.addEventListener("submit", (evt) => {
 
   sendData(
     () => {
-      console.log("Success! Refreshing the list now...");
+      hideLoadingModal();
+      showSuccessMessage();
 
       poEntriesListElement.innerHTML = "";
 
       getData(
         (data) => {
+          hideLoadingModal()
           data.forEach((entry) => {
             renderPoEntry(entry);
           });
         },
         (error) => {
+          hideLoadingModal()
+          showErrorMessage(error);
           console.log(`${error} - Unable to load data`);
         }
       );
     },
     () => {
+      hideLoadingModal()
+      showErrorMessage("Unable to send data");
       throw new Error("Unable to send data");
     },
     newObjToJson
   );
 });
 
+showLoadingModal();
 console.log("attempting to fetch data...");
 
 getData(
   (data) => {
+    hideLoadingModal();
     data.forEach((entry) => {
       renderPoEntry(entry);
     });
     console.log("Data obtained successfully!");
   },
   (error) => {
+    hideLoadingModal();
+    showErrorMessage(error);
     console.log(`${error} - Unable to load data`);
   }
 );
 
-const renderUsers = (users) => {
-  users.forEach((user) => {
-    const optionElement = document.createElement("option");
-    optionElement.value = user.name;
-    optionElement.text = user.name;
-    usersListElement.appendChild(optionElement);
-  });
-};
-
 getUsers(
   (data) => {
+    hideLoadingModal();
     renderUsers(data);
   },
   (error) => {
+    hideLoadingModal();
+    showErrorMessage(error);
     console.log(`${error} - Unable to load users`);
   }
 );
 
-    </script>
+formDiscountElement.addEventListener("input", calculateTotalValue);
+
+
+      </script>
+
   </body>
 </html>
