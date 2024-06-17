@@ -5,7 +5,8 @@ import { createOrderLineDTO } from "./order-line-dto.js";
 import { renderUsers } from "./render-users.js";
 import { previewPrint } from "./preview-print.js";
 import { calculateTotalValue } from "./total-value.js";
-import { showSuccessMessage } from "./api-success.js";
+import { showSuccessMessage, showErrorMessage } from "./api-messages.js";
+import { showLoadingModal, hideLoadingModal } from "./loading-modal.js";
 
 const bodyElement = document.querySelector("body");
 const poSendForm = bodyElement.querySelector(".po-send-form");
@@ -63,6 +64,8 @@ modalPrintButton.addEventListener("click", () => {
 poSendForm.addEventListener("submit", (evt) => {
   evt.preventDefault();
 
+  showLoadingModal();
+
   const formData = new FormData(evt.target);
 
   let newObj = {};
@@ -74,47 +77,60 @@ poSendForm.addEventListener("submit", (evt) => {
 
   sendData(
     () => {
+      hideLoadingModal();
       showSuccessMessage();
 
       poEntriesListElement.innerHTML = "";
 
       getData(
         (data) => {
+          hideLoadingModal()
           data.forEach((entry) => {
             renderPoEntry(entry);
           });
         },
         (error) => {
+          hideLoadingModal()
+          showErrorMessage(error);
           console.log(`${error} - Unable to load data`);
         }
       );
     },
     () => {
+      hideLoadingModal()
+      showErrorMessage("Unable to send data");
       throw new Error("Unable to send data");
     },
     newObjToJson
   );
 });
 
+showLoadingModal();
 console.log("attempting to fetch data...");
 
 getData(
   (data) => {
+    hideLoadingModal();
     data.forEach((entry) => {
       renderPoEntry(entry);
     });
     console.log("Data obtained successfully!");
   },
   (error) => {
+    hideLoadingModal();
+    showErrorMessage(error);
     console.log(`${error} - Unable to load data`);
   }
 );
 
 getUsers(
   (data) => {
+    hideLoadingModal();
     renderUsers(data);
   },
   (error) => {
+    hideLoadingModal();
+    showErrorMessage(error);
     console.log(`${error} - Unable to load users`);
   }
 );
