@@ -154,6 +154,35 @@ select {
 
 /* Form */
 
+.po-number-for-edit {
+  display: block;
+  margin-bottom: 10px;
+}
+
+.po-number-for-edit--content {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  border: 10px solid #ee12a5;
+}
+
+.po-number-for-edit--content p {
+  font-size: 50px;
+}
+
+.po-number-for-edit--number {
+  color: #d1f310;
+}
+
+.po-number-for-edit--cancel {
+  color: #ff0b0b;
+}
+
+.po-number-for-edit--cancel:hover {
+  color: #0921db;
+  cursor: pointer;
+}
+
 .po-send-form {
   display: flex;
   flex-direction: column;
