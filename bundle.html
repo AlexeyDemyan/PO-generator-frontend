@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="./fonts/Roboto-Regular.ttf" />
+    <link rel="stylesheet" href="./css/style.css" />
+    <title>Purchase Order Generator</title>
+    <style>
+    /* Commons */
+
+@font-face {
+  font-style: normal;
+  font-weight: 400;
+  font-family: "Roboto";
+  font-display: swap;
+  src: url(../fonts/Roboto-Regular.ttf) format("truetype");
+}
+
+body {
+  font-family: "Roboto", sans-serif;
+  margin: 0;
+  background-color: #1f2937;
+  color: #f9faf8;
+  font-size: 18px;
+}
+
+.container {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+section {
+  padding-top: 100px;
+  padding-bottom: 100px;
+}
+
+input,
+select {
+  border-radius: 5px;
+  min-height: 40px;
+  font-size: 100%;
+  height: auto;
+  padding: 5px;
+  margin-bottom: 10px;
+}
+
+.standard-button {
+  height: 50px;
+  width: 100%;
+  border-radius: 5px;
+  border: 3px solid #3882f6;
+  font-size: 100%;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  cursor: pointer;
+}
+
+/* Modal */
+
+/* The Modal (background) */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  /* left: 0;
+  top: 0; */
+  width: 100%;
+  height: 100%;
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0, 0, 0); /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+}
+
+.modal-content {
+  color: #1f2937;
+}
+
+.modal-content ul {
+  list-style-type: none;
+}
+
+.modal-content ul li {
+  display: flex;
+  flex-direction: row;
+  margin:10px;
+}
+
+.modal-content--left-column {
+  min-width: 230px;
+  font-weight: 600;
+}
+
+/* The Close Button */
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* Header */
+
+.header {
+  padding-top: 20px;
+}
+
+.header__logo {
+  font-size: 24px;
+  color: #f9faf8;
+  font-weight: 700;
+}
+
+/* Form */
+
+.po-send-form {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.po-send-form > div {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  margin-top: 10px;
+  margin-bottom: 5px;
+}
+
+.form_content--container,
+.po-entries-list--container {
+  background-color: #f9faf8;
+  padding: 20px;
+}
+
+.po-entries-list--container {
+  color: #1f2937;
+}
+
+.form-content {
+  padding: 10px 60px 10px 60px;
+  background-color: #1f2937;
+  border-radius: 10px;
+  border: 5px solid black;
+}
+
+/* Order Lines List */
+
+.order_lines-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.po-send-form--order-lines {
+  display: flex;
+  flex-direction: column;
+}
+
+.order_lines li {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+/* PO Entries List */
+
+.po-entries-list--header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  border-bottom: 5px solid black;
+}
+
+.po-entries-list {
+  padding-left: 0;
+}
+
+.po-entries-list li {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border: 5px solid black;
+  min-height: 50px;
+  height: auto;
+  padding: 5px;
+}
+
+.po-entries-list li div {
+  text-align: center;
+}
+
+.po-entries-list li:hover {
+  cursor: pointer;
+}
+
+.po-entries-list--number {
+  width: 20%;
+}
+
+.po-entries-list--date {
+  width: 20%;
+}
+
+.po-entries-list--user {
+  width: 20%;
+}
+
+.po-entries-list--company {
+  width: 20%;
+}
+
+.po-entries-list--supplier {
+  width: 20%;
+}
+
+    </style>
+  </head>
+  <body>
+
+    <!-- Modal -->
+
+      <div class="modal">
+        <div class="modal-content">
+          <span class="close">&times;</span>
+          <ul>
+            <li><div class="modal-content--left-column">Order Number</div><div class="modal-content--right-column modal-order-number"></div></li>
+            <li><div class="modal-content--left-column">User</div><div class="modal-content--right-column modal-user"></div></li>
+            <li><div class="modal-content--left-column">Company</div><div class="modal-content--right-column modal-company"></div></li>
+            <li><div class="modal-content--left-column">Date</div><div class="modal-content--right-column modal-date"></div></li>
+            <li><div class="modal-content--left-column">Supplier</div><div class="modal-content--right-column modal-supplier"></div></li>
+            <li><div class="modal-content--left-column">Supplier Address</div><div class="modal-content--right-column modal-supplier-address"></div></li>
+            <li><div class="modal-content--left-column">Supplier Code</div><div class="modal-content--right-column modal-supplier-code"></div></li>
+            <li><div class="modal-content--left-column">Delivery Date</div><div class="modal-content--right-column modal-delivery-date"></div></li>
+            <li><div class="modal-content--left-column">Order</div><div class="modal-content--right-column modal-order"></div></li>
+            <li><div class="modal-content--left-column">Order Items</div><div class="modal-content--right-column modal-order-lines"></div></li>
+            <li><div class="modal-content--left-column">Payment Terms</div><div class="modal-content--right-column modal-payment-terms"></div></li>
+            <li><div class="modal-content--left-column">Other Remarks</div><div class="modal-content--right-column modal-other-remarks"></div></li>
+            <li><div class="modal-content--left-column">Discount</div><div class="modal-content--right-column modal-discount"></div></li>
+            <li><div class="modal-content--left-column">Net Total Value</div><div class="modal-content--right-column modal-net-total-value"></div></li>
+            <li><div class="modal-content--left-column">Price Includes VAT</div><div class="modal-content--right-column modal-price-includes-vat"></div></li>
+          </ul>
+          <button class="modal-print standard-button">Print</button>
+        </div>
+      </div>
+
+    <!-- Header -->
+
+    <header class="header">
+      <div class="container">
+        <div class="header__inner section__inner">
+          <div class="header__logo">Cassar Camilleri</div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main -->
+
+    <main class="main">
+      <!-- Intro -->
+
+      <section>
+        <div class="container">
+          <div class="section__inner">
+            <div class="form">
+              <div class="form_content--container">
+                <div class="form-content">
+
+                  <form action="/form" method="POST" class="po-send-form">
+                    <div class="po-send-form--user">
+                      <label for="user">User:</label>
+                      <select class="users-list" id="user" name="user">
+                      </select>
+                    </div>
+                    <div class="po-send-form--company">
+                      <label for="company">Company:</label>
+                      <select id="company" name="company">
+                        <option value="Marsovin Winery Ltd">Marsovin Winery Ltd</option>
+                        <option value="CassarCamilleri Marketing, Sales & Distribution Ltd">CassarCamilleri Marketing, Sales & Distribution Ltd</option>
+                        <option value="Marsovin Viticulture Ltd">Marsovin Viticulture Ltd</option>
+                      </select>
+                    </div>
+                    <div class="po-send-form--date">
+                      <label for="date">Date:</label>
+                      <input name="date" type="date">
+                    </div>
+                    <div class="po-send-form--supplier">
+                      <label for="supplier">Supplier:</label>
+                      <input name="supplier" type="text">
+                    </div>
+                    <div class="po-send-form--supplierAddress">
+                      <label for="supplierAddress">Supplier Address:</label>
+                      <input name="supplierAddress" type="text">
+                    </div>
+                    <div class="po-send-form--supplierCode">
+                      <label for="supplierCode">Supplier Code:</label>
+                      <input name="supplierCode" type="text">
+                    </div>
+                    <div class="po-send-form--deliveryDate">
+                      <label for="deliveryDate">Delivery Date:</label>
+                      <input name="deliveryDate" type="date">
+                    </div>
+                    <div class="po-send-form--order">
+                      <label for="order">Order:</label>
+                      <input name="order" type="text">
+                    </div>
+                    <div class="po-send-form--order-lines">
+                      <label for="order_lines"><h2>Order Lines</h2></label>
+                      <div class="order_lines-header">
+                      <p>Product</p>
+                      <p>Supplier Ref.</p>
+                      <p>Quantity</p>
+                      <p>Unit Price</p>
+                      <p>Total Price</p>
+                      </div>
+                      <ul name="order_lines" class="order_lines">
+                      </ul>
+                      <button class="add-new-line-button standard-button">Add New Line</button>
+                    </div>
+                    <div class="po-send-form--paymentTerms">
+                      <label for="paymentTerms">Payment Terms:</label>
+                      <input name="paymentTerms" type="text">
+                    </div>
+                    <div class="po-send-form--otherRemarks">
+                      <label for="otherRemarks">Other Remarks:</label>
+                      <input name="otherRemarks" type="text">
+                    </div>
+                    <div class="po-send-form--discount">
+                      <label for="discount">Discount:</label>
+                      <input name="discount" type="number">
+                    </div>
+                    <div class="po-send-form--netTotalValue">
+                      <label for="netTotalValue">Net Total Value:</label>
+                      <input name="netTotalValue" type="number">
+                    </div>
+                    <div class="po-send-form--priceIncludesVat">
+                      <label for="priceIncludesVat">Price Includes VAT:</label>
+                      <select id="priceIncludesVat" name="priceIncludesVat">
+                        <option value="Yes">Yes</option>
+                        <option value="No">No</option>
+                      </select>
+                    </div>
+                    <input class="standard-button" type="submit" value="Submit PO">
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="container">
+          <div class="section__inner">
+            <div class="po-entries-list--container">
+              <div class="po-entries-list--header">
+                <h2>PO Number</h2>
+                <h2>Date</h2>
+                <h2>User</h2>
+                <h2>Company</h2>
+                <h2>Supplier</h2>
+              </div>
+              <ul class="po-entries-list"></ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    <script>
+      const previewPrint = (orderNumber) => {
+  fetch(`http://34.154.93.127:3333/po_entries/print${orderNumber}`)
+    .then((response) => {
+      if (response.ok) {
+        window.open(
+          `http://34.154.93.127:3333/po_entries/print${orderNumber}`,
+          "_blank"
+        );
+        return response;
+      }
+      throw new Error(`${response.status} ${response.statusText}`);
+    })
+    .then((data) => console.log(data))
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
+const bodyElement = document.querySelector("body");
+const poSendForm = bodyElement.querySelector(".po-send-form");
+const poEntriesListElement = bodyElement.querySelector(".po-entries-list");
+const addNewLineButton = bodyElement.querySelector(".add-new-line-button");
+const modalElement = bodyElement.querySelector(".modal");
+const modalOrderNumberElement = modalElement.querySelector(
+  ".modal-order-number"
+);
+const closeButton = modalElement.querySelector(".close");
+const modalPrintButton = modalElement.querySelector(".modal-print");
+const modalUserElement = modalElement.querySelector(".modal-user");
+const modalCompanyElement = modalElement.querySelector(".modal-company");
+const modalDateElement = modalElement.querySelector(".modal-date");
+const modalSupplierElement = modalElement.querySelector(".modal-supplier");
+const modalSupplierAddressElement = modalElement.querySelector(
+  ".modal-supplier-address"
+);
+const modalSupplierCodeElement = modalElement.querySelector(
+  ".modal-supplier-code"
+);
+const modalDeliveryDateElement = modalElement.querySelector(
+  ".modal-delivery-date"
+);
+const modalOrderElement = modalElement.querySelector(".modal-order");
+const modalOrderLinesElement = modalElement.querySelector(".modal-order-lines");
+const modalPaymentTermsElement = modalElement.querySelector(
+  ".modal-payment-terms"
+);
+const modalOtherRemarksElement = modalElement.querySelector(
+  ".modal-other-remarks"
+);
+const modalDiscountElement = modalElement.querySelector(".modal-discount");
+const modalNetTotalValueElement = modalElement.querySelector(
+  ".modal-net-total-value"
+);
+const modalPriceIncludesVatElement = modalElement.querySelector(
+  ".modal-price-includes-vat"
+);
+const formElement = bodyElement.querySelector(".po-send-form");
+const orderLinesList = formElement.querySelector(".order_lines");
+
+const sendData = (onSuccess, onFail, formData) => {
+  fetch("http://34.154.93.127:3333/po_entries", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: formData,
+  })
+    .then((response) => {
+      if (response.ok) {
+        onSuccess();
+      } else {
+        onFail();
+      }
+    })
+    .catch(() => {
+      onFail();
+    });
+};
+
+const getData = (onSuccess, onFail) => {
+  fetch("http://34.154.93.127:3333/po_entries")
+    .then((response) => {
+      if (response.ok) {
+        return response.json();
+      }
+      throw new Error(`${response.status} ${response.statusText}`);
+    })
+    .then((data) => {
+      onSuccess(data);
+    })
+    .catch((err) => {
+      onFail(err);
+    });
+};
+
+const getUsers = (onSuccess, onFail) => {
+  fetch("http://34.154.93.127:3333/users")
+    .then((response) => {
+      if (response.ok) {
+        return response.json();
+      }
+      throw new Error(`${response.status} ${response.statusText}`);
+    })
+    .then((data) => {
+      onSuccess(data);
+    })
+    .catch((err) => {
+      onFail(err);
+    });
+};
+
+const renderOrderLine = (
+  orderLinesRenderedAmount,
+  maxOrderLinesRenderedAmount
+) => {
+  if (orderLinesRenderedAmount <= maxOrderLinesRenderedAmount) {
+    const orderLineItem = document.createElement("li");
+    orderLineItem.classList.add("order-line");
+    orderLineItem.classList.add(`order-line-${orderLinesRenderedAmount + 1}`);
+    orderLineItem.innerHTML = `
+  <input class="order-line--product" type="text">
+  <input class="order-line--supplier-ref" type="text">
+  <input class="order-line--quantity" type="text">
+  <input class="order-line--unit-price" type="text">
+  <input class="order-line--total-price" type="text">`;
+
+    orderLinesList.appendChild(orderLineItem);
+  } else {
+    console.log("cannot create more order lines");
+  }
+};
+
+const createOrderItemsTruncatedPreview = (orderLines) => {
+  let productNamesList = [];
+
+  orderLines.forEach((line) => {
+    productNamesList.push(line.product);
+  });
+
+  return `${productNamesList.join(", ").slice(0, 50)} ...`;
+};
+
+const createOrderLineDTO = () => {
+  const orderLineDTO = [];
+
+  const bodyElement = document.querySelector("body");
+  const orderLinesElementsList = bodyElement.querySelectorAll(".order-line");
+
+  orderLinesElementsList.forEach((orderLine) => {
+    const orderLineObj = {
+      product: orderLine.querySelector(".order-line--product").value,
+      supplierRef: orderLine.querySelector(".order-line--supplier-ref").value,
+      quantity: orderLine.querySelector(".order-line--quantity").value,
+      unitPrice: orderLine.querySelector(".order-line--unit-price").value,
+      totalPrice: orderLine.querySelector(".order-line--total-price").value,
+    };
+    orderLineDTO.push(orderLineObj);
+  });
+  return orderLineDTO;
+};
+
+const renderModal = (poEntry) => {
+  modalOrderNumberElement.innerText = `${new Date(
+    poEntry.createdAt
+  ).getFullYear()}-${poEntry.orderNumber}`;
+  modalOrderNumberElement.dataset.orderNumber = poEntry.orderNumber;
+  modalUserElement.innerText = poEntry.user;
+  modalCompanyElement.innerText = poEntry.company;
+  modalDateElement.innerText = `${
+    poEntry.date ? new Date(poEntry.date).toLocaleDateString() : ""
+  }`;
+  modalSupplierElement.innerText = poEntry.supplier;
+  modalSupplierAddressElement.innerText = poEntry.supplierAddress;
+  modalSupplierCodeElement.innerText = poEntry.supplierCode;
+  modalDeliveryDateElement.innerText = `${
+    poEntry.date ? new Date(poEntry.deliveryDate).toLocaleDateString() : ""
+  }`;
+  modalOrderElement.innerText = poEntry.order;
+  modalOrderLinesElement.innerText = createOrderItemsTruncatedPreview(
+    poEntry.orderLines
+  );
+  modalPaymentTermsElement.innerText = poEntry.paymentTerms;
+  modalOtherRemarksElement.innerText = poEntry.otherRemarks;
+  modalDiscountElement.innerText = poEntry.discount;
+  modalNetTotalValueElement.innerText = poEntry.netTotalValue;
+  modalPriceIncludesVatElement.innerText = poEntry.priceIncludesVat;
+  modalElement.style.display = "block";
+};
+const usersListElement = formElement.querySelector(".users-list");
+
+const renderPoEntry = (poEntry) => {
+  const poEntryListItem = document.createElement("li");
+
+  poEntryListItem.innerHTML = `
+  <div class="po-entries-list--number">${new Date(
+    poEntry.createdAt
+  ).getFullYear()}-${poEntry.orderNumber}</div>
+  <div class="po-entries-list--date">${
+    poEntry.date ? new Date(poEntry.date).toLocaleDateString() : ""
+  }</div>
+  <div class="po-entries-list--user">${poEntry.user}</div>
+  <div class="po-entries-list--company">${poEntry.company}</div>
+  <div class="po-entries-list--supplier">${poEntry.supplier}</div>`;
+
+  poEntryListItem.addEventListener("click", () => {
+    renderModal(poEntry);
+  });
+
+  poEntriesListElement.appendChild(poEntryListItem);
+};
+
+let orderLinesRenderedAmount = 0;
+const maxOrderLinesRenderedAmount = 10;
+renderOrderLine(orderLinesRenderedAmount, maxOrderLinesRenderedAmount);
+orderLinesRenderedAmount++;
+
+addNewLineButton.addEventListener("click", (evt) => {
+  evt.preventDefault();
+  renderOrderLine(orderLinesRenderedAmount, maxOrderLinesRenderedAmount);
+  orderLinesRenderedAmount++;
+});
+
+closeButton.addEventListener("click", () => {
+  modalElement.style.display = "none";
+});
+
+document.addEventListener("keydown", (evt) => {
+  if (evt.key === "Escape") {
+    modalElement.style.display = "none";
+  }
+});
+
+modalPrintButton.addEventListener("click", () => {
+  const oderNumberFromDataset = modalOrderNumberElement.dataset.orderNumber;
+  previewPrint(oderNumberFromDataset);
+});
+
+poSendForm.addEventListener("submit", (evt) => {
+  evt.preventDefault();
+
+  const formData = new FormData(evt.target);
+
+  let newObj = {};
+  formData.forEach((value, key) => (newObj[key] = value));
+  newObj.orderLines = createOrderLineDTO();
+  let newObjToJson = JSON.stringify(newObj);
+
+  console.log(newObjToJson);
+
+  sendData(
+    () => {
+      console.log("Success! Refreshing the list now...");
+
+      poEntriesListElement.innerHTML = "";
+
+      getData(
+        (data) => {
+          data.forEach((entry) => {
+            renderPoEntry(entry);
+          });
+        },
+        (error) => {
+          console.log(`${error} - Unable to load data`);
+        }
+      );
+    },
+    () => {
+      throw new Error("Unable to send data");
+    },
+    newObjToJson
+  );
+});
+
+console.log("attempting to fetch data...");
+
+getData(
+  (data) => {
+    data.forEach((entry) => {
+      renderPoEntry(entry);
+    });
+    console.log("Data obtained successfully!");
+  },
+  (error) => {
+    console.log(`${error} - Unable to load data`);
+  }
+);
+
+const renderUsers = (users) => {
+  users.forEach((user) => {
+    const optionElement = document.createElement("option");
+    optionElement.value = user.name;
+    optionElement.text = user.name;
+    usersListElement.appendChild(optionElement);
+  });
+};
+
+getUsers(
+  (data) => {
+    renderUsers(data);
+  },
+  (error) => {
+    console.log(`${error} - Unable to load users`);
+  }
+);
+
+    </script>
+  </body>
+</html>
