@@ -155,7 +155,7 @@ select {
 /* Form */
 
 .po-number-for-edit {
-  display: block;
+  display: none;
   margin-bottom: 10px;
 }
 

@@ -7,10 +7,16 @@ import { previewPrint } from "./preview-print.js";
 import { calculateTotalValue } from "./total-value.js";
 import { showSuccessMessage, showErrorMessage } from "./api-messages.js";
 import { showLoadingModal, hideLoadingModal } from "./loading-modal.js";
+import { renderEdit, cancelEdit } from "./edit-po.js";
 
 const bodyElement = document.querySelector("body");
 const poSendForm = bodyElement.querySelector(".po-send-form");
 const poEntriesListElement = bodyElement.querySelector(".po-entries-list");
+const poNumberForEditElement = bodyElement.querySelector('.po-number-for-edit');
+const editCloseButton = poNumberForEditElement.querySelector(
+  ".po-number-for-edit--cancel"
+);
+
 const formDiscountElement = poSendForm.querySelector(".discount-input");
 
 const addNewLineButton = bodyElement.querySelector(".add-new-line-button");
@@ -21,6 +27,7 @@ const modalOrderNumberElement = modalElement.querySelector(
 );
 const closeButton = modalElement.querySelector(".close");
 const modalPrintButton = modalElement.querySelector(".modal-print");
+const modalEditButton = modalElement.querySelector(".modal-edit");
 
 const apiModalElement = bodyElement.querySelector(".api-modal");
 const apiModalCloseButton = apiModalElement.querySelector(".close");
@@ -49,6 +56,8 @@ apiModalOkButton.addEventListener("click", () => {
   apiModalElement.style.display = "none";
 });
 
+editCloseButton.addEventListener('click', cancelEdit)
+
 document.addEventListener("keydown", (evt) => {
   if (evt.key === "Escape") {
     modalElement.style.display = "none";
@@ -59,6 +68,11 @@ document.addEventListener("keydown", (evt) => {
 modalPrintButton.addEventListener("click", () => {
   const oderNumberFromDataset = modalOrderNumberElement.dataset.orderNumber;
   previewPrint(oderNumberFromDataset);
+});
+
+modalEditButton.addEventListener("click", () => {
+  const oderNumberFromDataset = modalOrderNumberElement.dataset.orderNumber;
+  renderEdit(oderNumberFromDataset);
 });
 
 poSendForm.addEventListener("submit", (evt) => {
@@ -84,20 +98,20 @@ poSendForm.addEventListener("submit", (evt) => {
 
       getData(
         (data) => {
-          hideLoadingModal()
+          hideLoadingModal();
           data.forEach((entry) => {
             renderPoEntry(entry);
           });
         },
         (error) => {
-          hideLoadingModal()
+          hideLoadingModal();
           showErrorMessage(error);
           console.log(`${error} - Unable to load data`);
         }
       );
     },
     () => {
-      hideLoadingModal()
+      hideLoadingModal();
       showErrorMessage("Unable to send data");
       throw new Error("Unable to send data");
     },
