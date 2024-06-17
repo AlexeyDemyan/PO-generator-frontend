@@ -5,11 +5,12 @@ import { createOrderLineDTO } from "./order-line-dto.js";
 import { renderUsers } from "./render-users.js";
 import { previewPrint } from "./preview-print.js";
 import { calculateTotalValue } from "./total-value.js";
+import { showSuccessMessage } from "./api-success.js";
 
 const bodyElement = document.querySelector("body");
 const poSendForm = bodyElement.querySelector(".po-send-form");
 const poEntriesListElement = bodyElement.querySelector(".po-entries-list");
-const formDiscountElement = poSendForm.querySelector('.discount-input');
+const formDiscountElement = poSendForm.querySelector(".discount-input");
 
 const addNewLineButton = bodyElement.querySelector(".add-new-line-button");
 
@@ -19,6 +20,10 @@ const modalOrderNumberElement = modalElement.querySelector(
 );
 const closeButton = modalElement.querySelector(".close");
 const modalPrintButton = modalElement.querySelector(".modal-print");
+
+const apiModalElement = bodyElement.querySelector(".api-modal");
+const apiModalCloseButton = apiModalElement.querySelector(".close");
+const apiModalOkButton = apiModalElement.querySelector(".modal-ok");
 
 let orderLinesRenderedAmount = 0;
 const maxOrderLinesRenderedAmount = 10;
@@ -35,9 +40,18 @@ closeButton.addEventListener("click", () => {
   modalElement.style.display = "none";
 });
 
+apiModalCloseButton.addEventListener("click", () => {
+  apiModalElement.style.display = "none";
+});
+
+apiModalOkButton.addEventListener("click", () => {
+  apiModalElement.style.display = "none";
+});
+
 document.addEventListener("keydown", (evt) => {
   if (evt.key === "Escape") {
     modalElement.style.display = "none";
+    apiModalElement.style.display = "none";
   }
 });
 
@@ -60,7 +74,7 @@ poSendForm.addEventListener("submit", (evt) => {
 
   sendData(
     () => {
-      console.log("Success! Refreshing the list now...");
+      showSuccessMessage();
 
       poEntriesListElement.innerHTML = "";
 
@@ -105,5 +119,4 @@ getUsers(
   }
 );
 
-formDiscountElement.addEventListener('input', calculateTotalValue);
-
+formDiscountElement.addEventListener("input", calculateTotalValue);
