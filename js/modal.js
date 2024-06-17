@@ -8,7 +8,6 @@ const modalSupplierElement = modalElement.querySelector(".modal-supplier");
 const modalSupplierAddressElement = modalElement.querySelector('.modal-supplier-address');
 const modalSupplierCodeElement = modalElement.querySelector('.modal-supplier-code');
 const modalDeliveryDateElement = modalElement.querySelector('.modal-delivery-date');
-const modalOrderElement = modalElement.querySelector('.modal-order');
 const modalOrderLinesElement = modalElement.querySelector('.modal-order-lines');
 const modalPaymentTermsElement = modalElement.querySelector('.modal-payment-terms');
 const modalOtherRemarksElement = modalElement.querySelector('.modal-other-remarks');
@@ -36,7 +35,6 @@ export const renderModal = (poEntry) => {
   modalSupplierAddressElement.innerText = poEntry.supplierAddress;
   modalSupplierCodeElement.innerText = poEntry.supplierCode;
   modalDeliveryDateElement.innerText = `${poEntry.date ? new Date(poEntry.deliveryDate).toLocaleDateString() : ""}`;
-  modalOrderElement.innerText = poEntry.order;
   modalOrderLinesElement.innerText = createOrderItemsTruncatedPreview(poEntry.orderLines);
   modalPaymentTermsElement.innerText = poEntry.paymentTerms;
   modalOtherRemarksElement.innerText = poEntry.otherRemarks;

@@ -4,15 +4,19 @@ import { renderOrderLine } from "./order-line.js";
 import { createOrderLineDTO } from "./order-line-dto.js";
 import { renderUsers } from "./render-users.js";
 import { previewPrint } from "./preview-print.js";
+import { calculateTotalValue } from "./total-value.js";
 
 const bodyElement = document.querySelector("body");
 const poSendForm = bodyElement.querySelector(".po-send-form");
 const poEntriesListElement = bodyElement.querySelector(".po-entries-list");
+const formDiscountElement = poSendForm.querySelector('.discount-input');
 
 const addNewLineButton = bodyElement.querySelector(".add-new-line-button");
 
 const modalElement = bodyElement.querySelector(".modal");
-const modalOrderNumberElement = modalElement.querySelector('.modal-order-number');
+const modalOrderNumberElement = modalElement.querySelector(
+  ".modal-order-number"
+);
 const closeButton = modalElement.querySelector(".close");
 const modalPrintButton = modalElement.querySelector(".modal-print");
 
@@ -39,7 +43,7 @@ document.addEventListener("keydown", (evt) => {
 
 modalPrintButton.addEventListener("click", () => {
   const oderNumberFromDataset = modalOrderNumberElement.dataset.orderNumber;
-  previewPrint(oderNumberFromDataset)
+  previewPrint(oderNumberFromDataset);
 });
 
 poSendForm.addEventListener("submit", (evt) => {
@@ -99,4 +103,7 @@ getUsers(
   (error) => {
     console.log(`${error} - Unable to load users`);
   }
-)
+);
+
+formDiscountElement.addEventListener('input', calculateTotalValue);
+

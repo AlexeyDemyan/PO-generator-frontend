@@ -26,7 +26,6 @@
             <li><div class="modal-content--left-column">Supplier Address</div><div class="modal-content--right-column modal-supplier-address"></div></li>
             <li><div class="modal-content--left-column">Supplier Code</div><div class="modal-content--right-column modal-supplier-code"></div></li>
             <li><div class="modal-content--left-column">Delivery Date</div><div class="modal-content--right-column modal-delivery-date"></div></li>
-            <li><div class="modal-content--left-column">Order</div><div class="modal-content--right-column modal-order"></div></li>
             <li><div class="modal-content--left-column">Order Items</div><div class="modal-content--right-column modal-order-lines"></div></li>
             <li><div class="modal-content--left-column">Payment Terms</div><div class="modal-content--right-column modal-payment-terms"></div></li>
             <li><div class="modal-content--left-column">Other Remarks</div><div class="modal-content--right-column modal-other-remarks"></div></li>
@@ -62,12 +61,12 @@
 
                   <form action="/form" method="POST" class="po-send-form">
                     <div class="po-send-form--user">
-                      <label for="user">User:</label>
+                      <label for="user">User</label>
                       <select class="users-list" id="user" name="user">
                       </select>
                     </div>
                     <div class="po-send-form--company">
-                      <label for="company">Company:</label>
+                      <label for="company">Company</label>
                       <select id="company" name="company">
                         <option value="Marsovin Winery Ltd">Marsovin Winery Ltd</option>
                         <option value="CassarCamilleri Marketing, Sales & Distribution Ltd">CassarCamilleri Marketing, Sales & Distribution Ltd</option>
@@ -75,28 +74,24 @@
                       </select>
                     </div>
                     <div class="po-send-form--date">
-                      <label for="date">Date:</label>
+                      <label for="date">Date</label>
                       <input name="date" type="date">
                     </div>
                     <div class="po-send-form--supplier">
-                      <label for="supplier">Supplier:</label>
+                      <label for="supplier">Supplier</label>
                       <input name="supplier" type="text">
                     </div>
                     <div class="po-send-form--supplierAddress">
-                      <label for="supplierAddress">Supplier Address:</label>
+                      <label for="supplierAddress">Supplier Address</label>
                       <input name="supplierAddress" type="text">
                     </div>
                     <div class="po-send-form--supplierCode">
-                      <label for="supplierCode">Supplier Code:</label>
+                      <label for="supplierCode">Supplier Code</label>
                       <input name="supplierCode" type="text">
                     </div>
                     <div class="po-send-form--deliveryDate">
-                      <label for="deliveryDate">Delivery Date:</label>
+                      <label for="deliveryDate">Delivery Date</label>
                       <input name="deliveryDate" type="date">
-                    </div>
-                    <div class="po-send-form--order">
-                      <label for="order">Order:</label>
-                      <input name="order" type="text">
                     </div>
                     <div class="po-send-form--order-lines">
                       <label for="order_lines"><h2>Order Lines</h2></label>
@@ -112,23 +107,23 @@
                       <button class="add-new-line-button standard-button">Add New Line</button>
                     </div>
                     <div class="po-send-form--paymentTerms">
-                      <label for="paymentTerms">Payment Terms:</label>
+                      <label for="paymentTerms">Payment Terms</label>
                       <input name="paymentTerms" type="text">
                     </div>
                     <div class="po-send-form--otherRemarks">
-                      <label for="otherRemarks">Other Remarks:</label>
+                      <label for="otherRemarks">Other Remarks</label>
                       <input name="otherRemarks" type="text">
                     </div>
                     <div class="po-send-form--discount">
-                      <label for="discount">Discount:</label>
-                      <input name="discount" type="number">
+                      <label for="discount">Discount %</label>
+                      <input class="discount-input" name="discount" type="number" min="0" max="100" step=".01">
                     </div>
                     <div class="po-send-form--netTotalValue">
-                      <label for="netTotalValue">Net Total Value:</label>
-                      <input name="netTotalValue" type="number">
+                      <label for="netTotalValue">Net Total Value</label>
+                      <input class="netTotalValue-input" name="netTotalValue" type="number" step=".01" readonly>
                     </div>
                     <div class="po-send-form--priceIncludesVat">
-                      <label for="priceIncludesVat">Price Includes VAT:</label>
+                      <label for="priceIncludesVat">Price Includes VAT</label>
                       <select id="priceIncludesVat" name="priceIncludesVat">
                         <option value="Yes">Yes</option>
                         <option value="No">No</option>
