@@ -78,11 +78,11 @@ select {
   color: #1f2937;
 }
 
-.modal-content ul {
+.modal-content > ul {
   list-style-type: none;
 }
 
-.modal-content ul li {
+.modal-content > ul > li {
   display: flex;
   flex-direction: row;
   margin: 10px;
@@ -91,6 +91,13 @@ select {
 .modal-content--left-column {
   min-width: 230px;
   font-weight: 600;
+}
+
+.modal-order-lines-list--element {
+  min-width:300px;
+  width: 150%;
+  display: flex;
+  justify-content: space-around;
 }
 
 /* The Close Button */
@@ -166,7 +173,7 @@ select {
   border: 10px solid #ee12a5;
 }
 
-.po-number-for-edit--content p {
+.po-number-for-edit--content > p {
   font-size: 50px;
 }
 
@@ -240,14 +247,14 @@ label {
   max-width: 99%;
 }
 
-.order_lines li {
+.order_lines > li {
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
   margin-bottom: 10px;
 }
 
-.order_lines li input {
+.order_lines > li > input {
   min-width: 20px;
 }
 
@@ -264,7 +271,7 @@ label {
   padding-left: 0;
 }
 
-.po-entries-list li {
+.po-entries-list > li {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -274,11 +281,11 @@ label {
   padding: 5px;
 }
 
-.po-entries-list li div {
+.po-entries-list > li > div {
   text-align: center;
 }
 
-.po-entries-list li:hover {
+.po-entries-list > li:hover {
   cursor: pointer;
 }
 

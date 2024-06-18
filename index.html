@@ -26,7 +26,7 @@
             <li><div class="modal-content--left-column">Supplier Address</div><div class="modal-content--right-column modal-supplier-address"></div></li>
             <li><div class="modal-content--left-column">Supplier Code</div><div class="modal-content--right-column modal-supplier-code"></div></li>
             <li><div class="modal-content--left-column">Delivery Date</div><div class="modal-content--right-column modal-delivery-date"></div></li>
-            <li><div class="modal-content--left-column">Order Items</div><div class="modal-content--right-column modal-order-lines"></div></li>
+            <li><div class="modal-content--left-column">Order Lines</div><div class="modal-content--right-column modal-order-lines"><ul class="modal-order-lines-list"></ul></div></li>
             <li><div class="modal-content--left-column">Payment Terms</div><div class="modal-content--right-column modal-payment-terms"></div></li>
             <li><div class="modal-content--left-column">Other Remarks</div><div class="modal-content--right-column modal-other-remarks"></div></li>
             <li><div class="modal-content--left-column">Discount</div><div class="modal-content--right-column modal-discount"></div></li>
@@ -103,23 +103,23 @@
                     </div>
                     <div class="po-send-form--date">
                       <label for="date">Date</label>
-                      <input name="date" type="date">
+                      <input id="date" name="date" type="date">
                     </div>
                     <div class="po-send-form--supplier">
                       <label for="supplier">Supplier</label>
-                      <input name="supplier" type="text">
+                      <input id="supplier" name="supplier" type="text">
                     </div>
                     <div class="po-send-form--supplierAddress">
                       <label for="supplierAddress">Supplier Address</label>
-                      <input name="supplierAddress" type="text">
+                      <input id="supplierAddress" name="supplierAddress" type="text">
                     </div>
                     <div class="po-send-form--supplierCode">
                       <label for="supplierCode">Supplier Code</label>
-                      <input name="supplierCode" type="text">
+                      <input id="supplierCode" name="supplierCode" type="text">
                     </div>
                     <div class="po-send-form--deliveryDate">
                       <label for="deliveryDate">Delivery Date</label>
-                      <input name="deliveryDate" type="date">
+                      <input id="deliveryDate" name="deliveryDate" type="date">
                     </div>
                     <div class="po-send-form--order-lines">
                       <label for="order_lines"><h3>Order Lines</h3></label>
@@ -131,26 +131,26 @@
                         <p>Unit Price</p>
                         <p>Total Price</p>
                         </div>
-                        <ul name="order_lines" class="order_lines">
+                        <ul id="order_lines" name="order_lines" class="order_lines">
                         </ul>
                         <button class="add-new-line-button standard-button">Add New Line</button>
                       </div>
                     </div>
                     <div class="po-send-form--paymentTerms">
                       <label for="paymentTerms">Payment Terms</label>
-                      <input name="paymentTerms" type="text">
+                      <input id="paymentTerms" name="paymentTerms" type="text">
                     </div>
                     <div class="po-send-form--otherRemarks">
                       <label for="otherRemarks">Other Remarks</label>
-                      <input name="otherRemarks" type="text">
+                      <input id="otherRemarks" name="otherRemarks" type="text">
                     </div>
                     <div class="po-send-form--discount">
                       <label for="discount">Discount %</label>
-                      <input class="discount-input" name="discount" type="number" min="0" max="100" step=".01">
+                      <input id="discount" class="discount-input" name="discount" type="number" min="0" max="100" step=".01">
                     </div>
                     <div class="po-send-form--netTotalValue">
                       <label for="netTotalValue">Net Total Value</label>
-                      <input class="netTotalValue-input" name="netTotalValue" type="number" step=".01" readonly>
+                      <input id="netTotalValue" class="netTotalValue-input" name="netTotalValue" type="number" step=".01" readonly>
                     </div>
                     <div class="po-send-form--priceIncludesVat">
                       <label for="priceIncludesVat">Price Includes VAT</label>

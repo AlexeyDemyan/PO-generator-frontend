@@ -72,7 +72,8 @@ modalPrintButton.addEventListener("click", () => {
 
 modalEditButton.addEventListener("click", () => {
   const oderNumberFromDataset = modalOrderNumberElement.dataset.orderNumber;
-  renderEdit(oderNumberFromDataset);
+  renderEdit(oderNumberFromDataset, modalElement);
+  modalElement.style.display = "none";
 });
 
 poSendForm.addEventListener("submit", (evt) => {
@@ -117,6 +118,7 @@ poSendForm.addEventListener("submit", (evt) => {
     },
     newObjToJson
   );
+  poSendForm.reset();
 });
 
 showLoadingModal();
