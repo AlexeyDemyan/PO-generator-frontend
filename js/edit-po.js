@@ -8,8 +8,6 @@ const poNumberElement = poNumberForEditElement.querySelector(
   ".po-number-for-edit--number"
 );
 
-let editingPO = false;
-
 const formatDate = (date) => {
   let rawDate = new Date(date);
   const year = rawDate.getFullYear();
@@ -103,17 +101,17 @@ const populateModalValuesIntoForm = (modalElement) => {
     modalElement.querySelector(".modal-price-includes-vat").innerText;
 };
 
-const renderEdit = (orderNumber, modalElement) => {
+const renderEdit = (orderNumber, modalElement, editingPOFlag) => {
   window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
-  editingPO = true;
+  editingPOFlag = true;
   console.log(orderNumber);
   console.log(modalElement);
   populateModalValuesIntoForm(modalElement);
   poNumberForEditElement.style.display = "block";
 };
 
-const cancelEdit = () => {
-  editingPO = false;
+const cancelEdit = (editingPOFlag) => {
+  editingPOFlag = false;
   poNumberForEditElement.style.display = "none";
 };
 

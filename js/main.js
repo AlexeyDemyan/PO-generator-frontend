@@ -1,4 +1,4 @@
-import { getData, sendData, getUsers } from "./api.js";
+import { getData, sendData, getUsers, updatePOEntry } from "./api.js";
 import { renderPoEntry } from "./POEntry.js";
 import { renderOrderLine } from "./order-line.js";
 import { createOrderLineDTO } from "./order-line-dto.js";
@@ -12,7 +12,7 @@ import { renderEdit, cancelEdit } from "./edit-po.js";
 const bodyElement = document.querySelector("body");
 const poSendForm = bodyElement.querySelector(".po-send-form");
 const poEntriesListElement = bodyElement.querySelector(".po-entries-list");
-const poNumberForEditElement = bodyElement.querySelector('.po-number-for-edit');
+const poNumberForEditElement = bodyElement.querySelector(".po-number-for-edit");
 const editCloseButton = poNumberForEditElement.querySelector(
   ".po-number-for-edit--cancel"
 );
@@ -32,6 +32,8 @@ const modalEditButton = modalElement.querySelector(".modal-edit");
 const apiModalElement = bodyElement.querySelector(".api-modal");
 const apiModalCloseButton = apiModalElement.querySelector(".close");
 const apiModalOkButton = apiModalElement.querySelector(".modal-ok");
+
+let editingPO = false;
 
 let orderLinesRenderedAmount = 0;
 const maxOrderLinesRenderedAmount = 10;
@@ -56,7 +58,10 @@ apiModalOkButton.addEventListener("click", () => {
   apiModalElement.style.display = "none";
 });
 
-editCloseButton.addEventListener('click', cancelEdit)
+editCloseButton.addEventListener("click", () => {
+  cancelEdit();
+  editingPO = false;
+});
 
 document.addEventListener("keydown", (evt) => {
   if (evt.key === "Escape") {
@@ -73,10 +78,12 @@ modalPrintButton.addEventListener("click", () => {
 modalEditButton.addEventListener("click", () => {
   const oderNumberFromDataset = modalOrderNumberElement.dataset.orderNumber;
   renderEdit(oderNumberFromDataset, modalElement);
+  editingPO = true;
   modalElement.style.display = "none";
 });
 
 poSendForm.addEventListener("submit", (evt) => {
+  console.log(editingPO);
   evt.preventDefault();
 
   showLoadingModal();
@@ -94,6 +101,8 @@ poSendForm.addEventListener("submit", (evt) => {
     () => {
       hideLoadingModal();
       showSuccessMessage();
+      cancelEdit();
+      editingPO = false;
 
       poEntriesListElement.innerHTML = "";
 
