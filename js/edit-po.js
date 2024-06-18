@@ -1,4 +1,8 @@
+import { renderOrderLine } from "./order-line.js";
+
 const bodyElement = document.querySelector("body");
+const formElement = bodyElement.querySelector(".po-send-form");
+const orderLinesList = formElement.querySelector(".order_lines");
 const poNumberForEditElement = bodyElement.querySelector(".po-number-for-edit");
 const poNumberElement = poNumberForEditElement.querySelector(
   ".po-number-for-edit--number"
@@ -14,18 +18,44 @@ const formatDate = (date) => {
   return `${year}-${month}-${day}`;
 };
 
-const extractLineInfo = (lineHTML) => {
-  let lineitems = [];
-  let currentLineItem = '';
-  console.log(lineHTML);
-  for (let i = 0; i < lineHTML.length; i++) {
-
-  }
-}
-
 const populateOrderLines = (orderLines) => {
+  let orderLinesRenderedAmount = 0;
+  const maxOrderLinesRenderedAmount = 10;
+  orderLinesList.innerHTML = "";
+
   for (let i = 1; i < orderLines.length; i++) {
-    extractLineInfo(orderLines[i].innerHTML)
+    const lineInfo = {
+      product: "",
+      quantity: "",
+      supplierRef: "",
+      totalPrice: "",
+      unitPrice: "",
+    };
+
+    Object.keys(lineInfo).forEach((key) => {
+      lineInfo[key] = orderLines[i].querySelector(
+        `.modal-order-lines-list--element-${key}`
+      ).innerText;
+    });
+    console.log(lineInfo);
+    renderOrderLine(orderLinesRenderedAmount, maxOrderLinesRenderedAmount);
+    orderLinesRenderedAmount++;
+
+
+    const lineElementToFill = orderLinesList.querySelector(
+      `.order-line-${i}`
+    );
+
+    lineElementToFill.querySelector(".order-line--product").value =
+      lineInfo.product;
+    lineElementToFill.querySelector(".order-line--supplier-ref").value =
+      lineInfo.supplierRef;
+    lineElementToFill.querySelector(".order-line--quantity").value =
+      lineInfo.quantity;
+    lineElementToFill.querySelector(".order-line--unit-price").value =
+      lineInfo.unitPrice;
+    lineElementToFill.querySelector(".order-line--total-price").value =
+      lineInfo.totalPrice;
   }
 };
 

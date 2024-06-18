@@ -42,12 +42,13 @@ const orderLineHeader = [
   "Total Price",
 ];
 
-const renderOrderLine = (orderLine) => {
+const renderOneOrderLine = (orderLine) => {
   const orderLineElement = document.createElement("li");
   orderLineElement.classList.add("modal-order-lines-list--element");
   for (const prop in orderLine) {
     const propElement = document.createElement("div");
     propElement.innerText = orderLine[prop];
+    propElement.classList.add(`modal-order-lines-list--element-${prop}`);
     orderLineElement.appendChild(propElement);
   }
   return orderLineElement;
@@ -70,11 +71,11 @@ export const renderModal = (poEntry) => {
     poEntry.date ? new Date(poEntry.deliveryDate).toLocaleDateString() : ""
   }`;
   modalOrderLinesListElement.innerHTML = "";
-  const headerLine = renderOrderLine(orderLineHeader);
+  const headerLine = renderOneOrderLine(orderLineHeader);
   modalOrderLinesListElement.appendChild(headerLine);
   console.log(poEntry.orderLines)
   poEntry.orderLines.forEach((line) => {
-    const orderLineElement = renderOrderLine(line);
+    const orderLineElement = renderOneOrderLine(line);
     modalOrderLinesListElement.appendChild(orderLineElement);
   });
   modalPaymentTermsElement.innerText = poEntry.paymentTerms;
