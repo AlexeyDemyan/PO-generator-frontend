@@ -40,6 +40,7 @@ section {
 input,
 select {
   border-radius: 5px;
+  /* min-width: 550px; */
   min-height: 40px;
   font-size: 100%;
   height: auto;
@@ -87,11 +88,11 @@ select {
   color: #1f2937;
 }
 
-.modal-content ul {
+.modal-content > ul {
   list-style-type: none;
 }
 
-.modal-content ul li {
+.modal-content > ul > li {
   display: flex;
   flex-direction: row;
   margin: 10px;
@@ -100,6 +101,13 @@ select {
 .modal-content--left-column {
   min-width: 230px;
   font-weight: 600;
+}
+
+.modal-order-lines-list--element {
+  min-width:300px;
+  width: 150%;
+  display: flex;
+  justify-content: space-around;
 }
 
 /* The Close Button */
@@ -163,8 +171,38 @@ select {
 
 /* Form */
 
+.po-number-for-edit {
+  display: none;
+  margin-bottom: 10px;
+}
+
+.po-number-for-edit--content {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  border: 10px solid #ee12a5;
+}
+
+.po-number-for-edit--content > p {
+  font-size: 50px;
+}
+
+.po-number-for-edit--number {
+  color: #d1f310;
+}
+
+.po-number-for-edit--cancel {
+  color: #ff0b0b;
+}
+
+.po-number-for-edit--cancel:hover {
+  color: #0921db;
+  cursor: pointer;
+}
+
 .po-send-form {
   display: flex;
+  flex-direction: column;
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: flex-start;
@@ -172,12 +210,14 @@ select {
 
 .po-send-form > div {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
 }
 
 label {
   margin-top: 10px;
   margin-bottom: 5px;
+  display: block;
+  min-width: 200px;
 }
 
 .form_content--container,
@@ -199,22 +239,33 @@ label {
 
 /* Order Lines List */
 
+.order_lines-content {
+  display: flex;
+  flex-direction: column;
+  width: 75%;
+}
+
 .order_lines-header {
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: space-evenly;
 }
 
 .po-send-form--order-lines {
   display: flex;
   flex-direction: column;
+  max-width: 99%;
 }
 
-.order_lines li {
+.order_lines > li {
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: space-evenly;
   margin-bottom: 10px;
+}
+
+.order_lines > li > input {
+  min-width: 20px;
 }
 
 /* PO Entries List */
@@ -230,7 +281,7 @@ label {
   padding-left: 0;
 }
 
-.po-entries-list li {
+.po-entries-list > li {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -240,11 +291,11 @@ label {
   padding: 5px;
 }
 
-.po-entries-list li div {
+.po-entries-list > li > div {
   text-align: center;
 }
 
-.po-entries-list li:hover {
+.po-entries-list > li:hover {
   cursor: pointer;
 }
 
@@ -272,174 +323,201 @@ label {
   </head>
   <body>
 
-      <!-- Modal -->
+ <!-- Modal -->
 
-      <div class="modal">
-        <div class="modal-content">
-          <span class="close">&times;</span>
-          <ul>
-            <li><div class="modal-content--left-column">Order Number</div><div class="modal-content--right-column modal-order-number"></div></li>
-            <li><div class="modal-content--left-column">User</div><div class="modal-content--right-column modal-user"></div></li>
-            <li><div class="modal-content--left-column">Company</div><div class="modal-content--right-column modal-company"></div></li>
-            <li><div class="modal-content--left-column">Date</div><div class="modal-content--right-column modal-date"></div></li>
-            <li><div class="modal-content--left-column">Supplier</div><div class="modal-content--right-column modal-supplier"></div></li>
-            <li><div class="modal-content--left-column">Supplier Address</div><div class="modal-content--right-column modal-supplier-address"></div></li>
-            <li><div class="modal-content--left-column">Supplier Code</div><div class="modal-content--right-column modal-supplier-code"></div></li>
-            <li><div class="modal-content--left-column">Delivery Date</div><div class="modal-content--right-column modal-delivery-date"></div></li>
-            <li><div class="modal-content--left-column">Order Items</div><div class="modal-content--right-column modal-order-lines"></div></li>
-            <li><div class="modal-content--left-column">Payment Terms</div><div class="modal-content--right-column modal-payment-terms"></div></li>
-            <li><div class="modal-content--left-column">Other Remarks</div><div class="modal-content--right-column modal-other-remarks"></div></li>
-            <li><div class="modal-content--left-column">Discount</div><div class="modal-content--right-column modal-discount"></div></li>
-            <li><div class="modal-content--left-column">Net Total Value</div><div class="modal-content--right-column modal-net-total-value"></div></li>
-            <li><div class="modal-content--left-column">Price Includes VAT</div><div class="modal-content--right-column modal-price-includes-vat"></div></li>
-          </ul>
-          <button class="modal-edit standard-button" style="border-color: #bd1fa8">Edit</button>
-          <button class="modal-print standard-button">Print</button>
-        </div>
-      </div>
+ <div class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <ul>
+      <li><div class="modal-content--left-column">Order Number</div><div class="modal-content--right-column modal-order-number"></div></li>
+      <li><div class="modal-content--left-column">User</div><div class="modal-content--right-column modal-user"></div></li>
+      <li><div class="modal-content--left-column">Company</div><div class="modal-content--right-column modal-company"></div></li>
+      <li><div class="modal-content--left-column">Date</div><div class="modal-content--right-column modal-date"></div></li>
+      <li><div class="modal-content--left-column">Supplier</div><div class="modal-content--right-column modal-supplier"></div></li>
+      <li><div class="modal-content--left-column">Supplier Address</div><div class="modal-content--right-column modal-supplier-address"></div></li>
+      <li><div class="modal-content--left-column">Supplier Code</div><div class="modal-content--right-column modal-supplier-code"></div></li>
+      <li><div class="modal-content--left-column">Delivery Date</div><div class="modal-content--right-column modal-delivery-date"></div></li>
+      <li><div class="modal-content--left-column">Order Lines</div><div class="modal-content--right-column modal-order-lines"><ul class="modal-order-lines-list"></ul></div></li>
+      <li><div class="modal-content--left-column">Payment Terms</div><div class="modal-content--right-column modal-payment-terms"></div></li>
+      <li><div class="modal-content--left-column">Other Remarks</div><div class="modal-content--right-column modal-other-remarks"></div></li>
+      <li><div class="modal-content--left-column">Discount</div><div class="modal-content--right-column modal-discount"></div></li>
+      <li><div class="modal-content--left-column">Net Total Value</div><div class="modal-content--right-column modal-net-total-value"></div></li>
+      <li><div class="modal-content--left-column">Price Includes VAT</div><div class="modal-content--right-column modal-price-includes-vat"></div></li>
+    </ul>
+    <button class="modal-edit standard-button" style="border-color: #bd1fa8">Edit</button>
+    <button class="modal-print standard-button">Print</button>
+  </div>
+</div>
 
-    <!-- API Modal -->
+<!-- API Modal -->
 
-        <div class="api-modal">
-          <div class="modal-content">
-            <span class="close">&times;</span>
-            <h1></h1>
-            <p></p>
-            <button class="modal-ok standard-button">OK</button>
-          </div>
-        </div>
+  <div class="api-modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h1></h1>
+      <p></p>
+      <button class="modal-ok standard-button">OK</button>
+    </div>
+  </div>
 
-    <!-- Loading Modal -->
+<!-- Loading Modal -->
 
-        <div class="loading-modal">
-          <div class="modal-content">
-            <h1>Loading...</h1>
-          </div>
-        </div>
+  <div class="loading-modal">
+    <div class="modal-content">
+      <h1>Loading...</h1>
+    </div>
+  </div>
 
-    <!-- Header -->
+<!-- Header -->
 
-    <header class="header">
-      <div class="container">
-        <div class="header__inner section__inner">
-          <div class="header__logo">Cassar Camilleri</div>
-        </div>
-      </div>
-    </header>
+<header class="header">
+<div class="container">
+  <div class="header__inner section__inner">
+    <div class="header__logo">Cassar Camilleri</div>
+  </div>
+</div>
+</header>
 
-    <!-- Main -->
+<!-- Main -->
 
-    <main class="main">
-      <!-- Intro -->
+<main class="main">
+<!-- Intro -->
 
-      <section>
-        <div class="container">
-          <div class="section__inner">
-            <div class="form">
-              <div class="form_content--container">
-                <div class="form-content">
+<section>
+  <div class="container">
+    <div class="section__inner">
+      <div class="form">
+        <div class="form_content--container">
+          <div class="form-content">
 
-                  <form action="/form" method="POST" class="po-send-form">
-                    <div class="po-send-form--user">
-                      <label for="user">User</label>
-                      <select class="users-list" id="user" name="user">
-                      </select>
-                    </div>
-                    <div class="po-send-form--company">
-                      <label for="company">Company</label>
-                      <select id="company" name="company">
-                        <option value="Marsovin Winery Ltd">Marsovin Winery Ltd</option>
-                        <option value="CassarCamilleri Marketing, Sales & Distribution Ltd">CassarCamilleri Marketing, Sales & Distribution Ltd</option>
-                        <option value="Marsovin Viticulture Ltd">Marsovin Viticulture Ltd</option>
-                      </select>
-                    </div>
-                    <div class="po-send-form--date">
-                      <label for="date">Date</label>
-                      <input name="date" type="date">
-                    </div>
-                    <div class="po-send-form--supplier">
-                      <label for="supplier">Supplier</label>
-                      <input name="supplier" type="text">
-                    </div>
-                    <div class="po-send-form--supplierAddress">
-                      <label for="supplierAddress">Supplier Address</label>
-                      <input name="supplierAddress" type="text">
-                    </div>
-                    <div class="po-send-form--supplierCode">
-                      <label for="supplierCode">Supplier Code</label>
-                      <input name="supplierCode" type="text">
-                    </div>
-                    <div class="po-send-form--deliveryDate">
-                      <label for="deliveryDate">Delivery Date</label>
-                      <input name="deliveryDate" type="date">
-                    </div>
-                    <div class="po-send-form--order-lines">
-                      <label for="order_lines"><h2>Order Lines</h2></label>
-                      <div class="order_lines-header">
-                      <p>Product</p>
-                      <p>Supplier Ref.</p>
-                      <p>Quantity</p>
-                      <p>Unit Price</p>
-                      <p>Total Price</p>
-                      </div>
-                      <ul name="order_lines" class="order_lines">
-                      </ul>
-                      <button class="add-new-line-button standard-button">Add New Line</button>
-                    </div>
-                    <div class="po-send-form--paymentTerms">
-                      <label for="paymentTerms">Payment Terms</label>
-                      <input name="paymentTerms" type="text">
-                    </div>
-                    <div class="po-send-form--otherRemarks">
-                      <label for="otherRemarks">Other Remarks</label>
-                      <input name="otherRemarks" type="text">
-                    </div>
-                    <div class="po-send-form--discount">
-                      <label for="discount">Discount %</label>
-                      <input class="discount-input" name="discount" type="number" min="0" max="100" step=".01">
-                    </div>
-                    <div class="po-send-form--netTotalValue">
-                      <label for="netTotalValue">Net Total Value</label>
-                      <input class="netTotalValue-input" name="netTotalValue" type="number" step=".01" readonly>
-                    </div>
-                    <div class="po-send-form--priceIncludesVat">
-                      <label for="priceIncludesVat">Price Includes VAT</label>
-                      <select id="priceIncludesVat" name="priceIncludesVat">
-                        <option value="Yes">Yes</option>
-                        <option value="No">No</option>
-                      </select>
-                    </div>
-                    <input class="standard-button" type="submit" value="Submit PO">
-                  </form>
+            <div class="po-number-for-edit">
+              <div class="po-number-for-edit--content">
+                <p class="po-number-for-edit--header">Editing Purchase Order number:</p>
+                <p class="po-number-for-edit--number">2024-5</p>
+                <p class="po-number-for-edit--cancel">&times;</p>
+              </div>
+            </div>
+
+            <form action="/form" method="POST" class="po-send-form">
+              <div class="po-send-form--user">
+                <label for="user">User</label>
+                <select class="users-list" id="user" name="user">
+                </select>
+              </div>
+              <div class="po-send-form--company">
+                <label for="company">Company</label>
+                <select id="company" name="company">
+                  <option value="Marsovin Winery Ltd">Marsovin Winery Ltd</option>
+                  <option value="CassarCamilleri Marketing, Sales & Distribution Ltd">CassarCamilleri Marketing, Sales & Distribution Ltd</option>
+                  <option value="Marsovin Viticulture Ltd">Marsovin Viticulture Ltd</option>
+                </select>
+              </div>
+              <div class="po-send-form--date">
+                <label for="date">Date</label>
+                <input id="date" name="date" type="date">
+              </div>
+              <div class="po-send-form--supplier">
+                <label for="supplier">Supplier</label>
+                <input id="supplier" name="supplier" type="text">
+              </div>
+              <div class="po-send-form--supplierAddress">
+                <label for="supplierAddress">Supplier Address</label>
+                <input id="supplierAddress" name="supplierAddress" type="text">
+              </div>
+              <div class="po-send-form--supplierCode">
+                <label for="supplierCode">Supplier Code</label>
+                <input id="supplierCode" name="supplierCode" type="text">
+              </div>
+              <div class="po-send-form--deliveryDate">
+                <label for="deliveryDate">Delivery Date</label>
+                <input id="deliveryDate" name="deliveryDate" type="date">
+              </div>
+              <div class="po-send-form--order-lines">
+                <label for="order_lines"><h3>Order Lines</h3></label>
+                <div class="order_lines-content">
+                  <div class="order_lines-header">
+                  <p>Product</p>
+                  <p>Supplier Ref.</p>
+                  <p>Quantity</p>
+                  <p>Unit Price</p>
+                  <p>Total Price</p>
+                  </div>
+                  <ul id="order_lines" name="order_lines" class="order_lines">
+                  </ul>
+                  <button class="add-new-line-button standard-button">Add New Line</button>
                 </div>
               </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section>
-        <div class="container">
-          <div class="section__inner">
-            <div class="po-entries-list--container">
-              <div class="po-entries-list--header">
-                <h2>PO Number</h2>
-                <h2>Date</h2>
-                <h2>User</h2>
-                <h2>Company</h2>
-                <h2>Supplier</h2>
+              <div class="po-send-form--paymentTerms">
+                <label for="paymentTerms">Payment Terms</label>
+                <input id="paymentTerms" name="paymentTerms" type="text">
               </div>
-              <ul class="po-entries-list"></ul>
-            </div>
+              <div class="po-send-form--otherRemarks">
+                <label for="otherRemarks">Other Remarks</label>
+                <input id="otherRemarks" name="otherRemarks" type="text">
+              </div>
+              <div class="po-send-form--discount">
+                <label for="discount">Discount %</label>
+                <input id="discount" class="discount-input" name="discount" type="number" min="0" max="100" step=".01">
+              </div>
+              <div class="po-send-form--netTotalValue">
+                <label for="netTotalValue">Net Total Value</label>
+                <input id="netTotalValue" class="netTotalValue-input" name="netTotalValue" type="number" step=".01" readonly>
+              </div>
+              <div class="po-send-form--priceIncludesVat">
+                <label for="priceIncludesVat">Price Includes VAT</label>
+                <select id="priceIncludesVat" name="priceIncludesVat">
+                  <option value="Yes">Yes</option>
+                  <option value="No">No</option>
+                </select>
+              </div>
+              <input class="standard-button" type="submit" value="Submit PO">
+            </form>
           </div>
         </div>
-      </section>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="section__inner">
+      <div class="po-entries-list--container">
+        <div class="po-entries-list--header">
+          <h2>PO Number</h2>
+          <h2>Date</h2>
+          <h2>User</h2>
+          <h2>Company</h2>
+          <h2>Supplier</h2>
+        </div>
+        <ul class="po-entries-list"></ul>
+      </div>
+    </div>
+  </div>
+</section>
 
       <script>
+
 const sendData = (onSuccess, onFail, formData) => {
   fetch('http://localhost:3333/po_entries',
     {
       method: 'POST',
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: formData
+    })
+    .then((response) => {
+      if (response.ok) {onSuccess()}
+      else {onFail();}
+    })
+    .catch(() => {onFail();});
+};
+
+const updatePOEntry = (onSuccess, onFail, formData) => {
+  fetch('http://localhost:3333/po_entries/update',
+    {
+      method: 'PUT',
       headers: {
         "Content-Type": "application/json",
       },
@@ -480,18 +558,9 @@ const bodyElement = document.querySelector("body");
 const apiModalElement = bodyElement.querySelector(".api-modal");
 const apiModalElementHeader = apiModalElement.querySelector("h1");
 const apiModalElementMessage = apiModalElement.querySelector("p");
-const loadingModalElement = bodyElement.querySelector(".loading-modal");
 
-const showLoadingModal = () => {
-  loadingModalElement.style.display = "block";
-};
-
-const hideLoadingModal = () => {
-  loadingModalElement.style.display = 'none';
-}
-
-const showSuccessMessage = () => {
-  apiModalElementHeader.innerText = "PO Created successfully!";
+const showSuccessMessage = (status) => {
+  apiModalElementHeader.innerText = `PO ${status} successfully!`;
   apiModalElementMessage.innerText =
     "You can open and view it from the list below";
   apiModalElement.style.display = "block";
@@ -504,52 +573,7 @@ const showErrorMessage = (errorMessage) => {
   apiModalElement.style.display = "block";
 };
 
-const modalElement = bodyElement.querySelector(".modal");
-const modalOrderNumberElement = modalElement.querySelector('.modal-order-number');
-const modalUserElement = modalElement.querySelector(".modal-user");
-const modalCompanyElement = modalElement.querySelector(".modal-company");
-const modalDateElement = modalElement.querySelector('.modal-date');
-const modalSupplierElement = modalElement.querySelector(".modal-supplier");
-const modalSupplierAddressElement = modalElement.querySelector('.modal-supplier-address');
-const modalSupplierCodeElement = modalElement.querySelector('.modal-supplier-code');
-const modalDeliveryDateElement = modalElement.querySelector('.modal-delivery-date');
-const modalOrderLinesElement = modalElement.querySelector('.modal-order-lines');
-const modalPaymentTermsElement = modalElement.querySelector('.modal-payment-terms');
-const modalOtherRemarksElement = modalElement.querySelector('.modal-other-remarks');
-const modalDiscountElement = modalElement.querySelector('.modal-discount');
-const modalNetTotalValueElement = modalElement.querySelector('.modal-net-total-value');
-const modalPriceIncludesVatElement = modalElement.querySelector('.modal-price-includes-vat');
-
-const createOrderItemsTruncatedPreview = (orderLines) => {
-  let productNamesList = [];
-
-  orderLines.forEach((line) => {
-    productNamesList.push(line.product)
-  });
-
-  return `${productNamesList.join(', ').slice(0, 50)} ...`
-}
-
-const renderModal = (poEntry) => {
-  modalOrderNumberElement.innerText = `${new Date(poEntry.createdAt).getFullYear()}-${poEntry.orderNumber}`;
-  modalOrderNumberElement.dataset.orderNumber = poEntry.orderNumber;
-  modalUserElement.innerText = poEntry.user;
-  modalCompanyElement.innerText = poEntry.company;
-  modalDateElement.innerText = `${poEntry.date ? new Date(poEntry.date).toLocaleDateString() : ""}`;
-  modalSupplierElement.innerText = poEntry.supplier;
-  modalSupplierAddressElement.innerText = poEntry.supplierAddress;
-  modalSupplierCodeElement.innerText = poEntry.supplierCode;
-  modalDeliveryDateElement.innerText = `${poEntry.date ? new Date(poEntry.deliveryDate).toLocaleDateString() : ""}`;
-  modalOrderLinesElement.innerText = createOrderItemsTruncatedPreview(poEntry.orderLines);
-  modalPaymentTermsElement.innerText = poEntry.paymentTerms;
-  modalOtherRemarksElement.innerText = poEntry.otherRemarks;
-  modalDiscountElement.innerText = poEntry.discount;
-  modalNetTotalValueElement.innerText = poEntry.netTotalValue;
-  modalPriceIncludesVatElement.innerText = poEntry.priceIncludesVat;
-  modalElement.style.display = 'block';
-};
-
-const createOrderLineDTO = () => {
+ const createOrderLineDTO = () => {
   const orderLineDTO = [];
 
   const bodyElement = document.querySelector("body");
@@ -568,6 +592,216 @@ const createOrderLineDTO = () => {
   return orderLineDTO;
 };
 
+const loadingModalElement = bodyElement.querySelector(".loading-modal");
+
+const showLoadingModal = () => {
+  loadingModalElement.style.display = "block";
+};
+
+const hideLoadingModal = () => {
+  loadingModalElement.style.display = 'none';
+}
+
+const formElement = bodyElement.querySelector(".po-send-form");
+const orderLinesList = formElement.querySelector(".order_lines");
+const poNumberForEditElement = bodyElement.querySelector(".po-number-for-edit");
+const poNumberElement = poNumberForEditElement.querySelector(
+  ".po-number-for-edit--number"
+);
+
+const formatDate = (date) => {
+  let rawDate = new Date(date);
+  const year = rawDate.getFullYear();
+  const month = String(rawDate.getMonth() + 1).padStart(2, "0");
+  const day = String(rawDate.getDate()).padStart(2, "0");
+  return `${year}-${month}-${day}`;
+};
+
+const populateOrderLines = (orderLines) => {
+  let orderLinesRenderedAmount = 0;
+  const maxOrderLinesRenderedAmount = 10;
+  orderLinesList.innerHTML = "";
+
+  for (let i = 1; i < orderLines.length; i++) {
+    const lineInfo = {
+      product: "",
+      quantity: "",
+      supplierRef: "",
+      totalPrice: "",
+      unitPrice: "",
+    };
+
+    Object.keys(lineInfo).forEach((key) => {
+      lineInfo[key] = orderLines[i].querySelector(
+        `.modal-order-lines-list--element-${key}`
+      ).innerText;
+    });
+    console.log(lineInfo);
+    renderOrderLine(orderLinesRenderedAmount, maxOrderLinesRenderedAmount);
+    orderLinesRenderedAmount++;
+
+
+    const lineElementToFill = orderLinesList.querySelector(
+      `.order-line-${i}`
+    );
+
+    lineElementToFill.querySelector(".order-line--product").value =
+      lineInfo.product;
+    lineElementToFill.querySelector(".order-line--supplier-ref").value =
+      lineInfo.supplierRef;
+    lineElementToFill.querySelector(".order-line--quantity").value =
+      lineInfo.quantity;
+    lineElementToFill.querySelector(".order-line--unit-price").value =
+      lineInfo.unitPrice;
+    lineElementToFill.querySelector(".order-line--total-price").value =
+      lineInfo.totalPrice;
+  }
+};
+
+const populateModalValuesIntoForm = (modalElement) => {
+  poNumberElement.innerText = modalElement.querySelector(
+    ".modal-order-number"
+  ).innerText;
+  document.getElementById("user").value =
+    modalElement.querySelector(".modal-user").innerText;
+  document.getElementById("company").value =
+    modalElement.querySelector(".modal-company").innerText;
+  document.getElementById("date").value = formatDate(
+    modalElement.querySelector(".modal-date").innerText
+  );
+  document.getElementById("supplier").value =
+    modalElement.querySelector(".modal-supplier").innerText;
+  document.getElementById("supplierAddress").value = modalElement.querySelector(
+    ".modal-supplier-address"
+  ).innerText;
+  document.getElementById("supplierCode").value = modalElement.querySelector(
+    ".modal-supplier-code"
+  ).innerText;
+  document.getElementById("deliveryDate").value = formatDate(
+    modalElement.querySelector(".modal-delivery-date").innerText
+  );
+
+  // Code to populate lines
+  populateOrderLines(
+    modalElement.querySelector(".modal-order-lines-list").querySelectorAll("li")
+  );
+  //
+
+  document.getElementById("paymentTerms").value = modalElement.querySelector(
+    ".modal-payment-terms"
+  ).innerText;
+  document.getElementById("otherRemarks").value = modalElement.querySelector(
+    ".modal-other-remarks"
+  ).innerText;
+  document.getElementById("discount").value =
+    modalElement.querySelector(".modal-discount").innerText;
+  document.getElementById("netTotalValue").value = modalElement.querySelector(
+    ".modal-net-total-value"
+  ).innerText;
+  document.getElementById("priceIncludesVat").value =
+    modalElement.querySelector(".modal-price-includes-vat").innerText;
+};
+
+const renderEdit = (orderNumber, modalElement) => {
+  window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+  console.log(orderNumber);
+  poNumberForEditElement.dataset.orderNumber = orderNumber;
+  //console.log(modalElement);
+  populateModalValuesIntoForm(modalElement);
+  poNumberForEditElement.style.display = "block";
+};
+
+const cancelEdit = () => {
+  poNumberForEditElement.style.display = "none";
+};
+
+const modalElement = bodyElement.querySelector(".modal");
+const modalOrderNumberElement = modalElement.querySelector(
+  ".modal-order-number"
+);
+const modalUserElement = modalElement.querySelector(".modal-user");
+const modalCompanyElement = modalElement.querySelector(".modal-company");
+const modalDateElement = modalElement.querySelector(".modal-date");
+const modalSupplierElement = modalElement.querySelector(".modal-supplier");
+const modalSupplierAddressElement = modalElement.querySelector(
+  ".modal-supplier-address"
+);
+const modalSupplierCodeElement = modalElement.querySelector(
+  ".modal-supplier-code"
+);
+const modalDeliveryDateElement = modalElement.querySelector(
+  ".modal-delivery-date"
+);
+const modalOrderLinesElement = modalElement.querySelector(".modal-order-lines");
+const modalOrderLinesListElement = modalOrderLinesElement.querySelector(
+  ".modal-order-lines-list"
+);
+const modalPaymentTermsElement = modalElement.querySelector(
+  ".modal-payment-terms"
+);
+const modalOtherRemarksElement = modalElement.querySelector(
+  ".modal-other-remarks"
+);
+const modalDiscountElement = modalElement.querySelector(".modal-discount");
+const modalNetTotalValueElement = modalElement.querySelector(
+  ".modal-net-total-value"
+);
+const modalPriceIncludesVatElement = modalElement.querySelector(
+  ".modal-price-includes-vat"
+);
+
+const orderLineHeader = [
+  "Product",
+  "Supplier Ref",
+  "Quantity",
+  "Unit Price",
+  "Total Price",
+];
+
+const renderOneOrderLine = (orderLine) => {
+  const orderLineElement = document.createElement("li");
+  orderLineElement.classList.add("modal-order-lines-list--element");
+  for (const prop in orderLine) {
+    const propElement = document.createElement("div");
+    propElement.innerText = orderLine[prop];
+    propElement.classList.add(`modal-order-lines-list--element-${prop}`);
+    orderLineElement.appendChild(propElement);
+  }
+  return orderLineElement;
+};
+
+ const renderModal = (poEntry) => {
+  modalOrderNumberElement.innerText = `${new Date(
+    poEntry.createdAt
+  ).getFullYear()}-${poEntry.orderNumber}`;
+  modalOrderNumberElement.dataset.orderNumber = poEntry.orderNumber;
+  modalUserElement.innerText = poEntry.user;
+  modalCompanyElement.innerText = poEntry.company;
+  modalDateElement.innerText = `${
+    poEntry.date ? new Date(poEntry.date).toLocaleDateString() : ""
+  }`;
+  modalSupplierElement.innerText = poEntry.supplier;
+  modalSupplierAddressElement.innerText = poEntry.supplierAddress;
+  modalSupplierCodeElement.innerText = poEntry.supplierCode;
+  modalDeliveryDateElement.innerText = `${
+    poEntry.date ? new Date(poEntry.deliveryDate).toLocaleDateString() : ""
+  }`;
+  modalOrderLinesListElement.innerHTML = "";
+  const headerLine = renderOneOrderLine(orderLineHeader);
+  modalOrderLinesListElement.appendChild(headerLine);
+  console.log(poEntry.orderLines)
+  poEntry.orderLines.forEach((line) => {
+    const orderLineElement = renderOneOrderLine(line);
+    modalOrderLinesListElement.appendChild(orderLineElement);
+  });
+  modalPaymentTermsElement.innerText = poEntry.paymentTerms;
+  modalOtherRemarksElement.innerText = poEntry.otherRemarks;
+  modalDiscountElement.innerText = poEntry.discount;
+  modalNetTotalValueElement.innerText = poEntry.netTotalValue;
+  modalPriceIncludesVatElement.innerText = poEntry.priceIncludesVat;
+  modalElement.style.display = "block";
+};
+
 const poSendForm = bodyElement.querySelector(".po-send-form");
 const formDiscountElement = poSendForm.querySelector('.discount-input');
 
@@ -581,33 +815,61 @@ const calculateTotalValue = () => {
   netTotalValueInputElement.value = (totalSum - totalDiscount).toFixed(2);
 }
 
-const formElement = bodyElement.querySelector(".po-send-form");
-const orderLinesList = formElement.querySelector(".order_lines");
+const calculateTotalPrice = (
+  quantityElement,
+  priceElement,
+  totalPriceElement
+) => {
+  totalPriceElement.value = (
+    Number(quantityElement.value) * Number(priceElement.value)
+  ).toFixed(2);
+};
 
-const renderOrderLine = (
+ const renderOrderLine = (
   orderLinesRenderedAmount,
   maxOrderLinesRenderedAmount
 ) => {
   if (orderLinesRenderedAmount <= maxOrderLinesRenderedAmount) {
     const orderLineItem = document.createElement("li");
-    orderLineItem.classList.add('order-line');
+    orderLineItem.classList.add("order-line");
     orderLineItem.classList.add(`order-line-${orderLinesRenderedAmount + 1}`);
     orderLineItem.innerHTML = `
   <input class="order-line--product" type="text">
   <input class="order-line--supplier-ref" type="text">
-  <input class="order-line--quantity" type="text">
+  <input class="order-line--quantity" type="number" step=".01">
   <input class="order-line--unit-price" type="number" step=".01">
-  <input class="order-line--total-price" type="number" step=".01">`;
+  <input class="order-line--total-price" type="number" step=".01" readonly>`;
 
     orderLinesList.appendChild(orderLineItem);
-    orderLineItem.querySelector('.order-line--total-price').addEventListener('input', calculateTotalValue)
+    orderLineItem
+      .querySelector(".order-line--quantity")
+      .addEventListener("input", () => {
+        calculateTotalPrice(
+          orderLineItem.querySelector(".order-line--quantity"),
+          orderLineItem.querySelector(".order-line--unit-price"),
+          orderLineItem.querySelector(".order-line--total-price")
+        );
+        calculateTotalValue();
+      });
+    orderLineItem
+      .querySelector(".order-line--unit-price")
+      .addEventListener("input", () => {
+        calculateTotalPrice(
+          orderLineItem.querySelector(".order-line--quantity"),
+          orderLineItem.querySelector(".order-line--unit-price"),
+          orderLineItem.querySelector(".order-line--total-price")
+        );
+        calculateTotalValue();
+      });
+  } else {
+    console.log("cannot create more order lines");
   }
-  else {console.log('cannot create more order lines')}
 };
+
 
 const poEntriesListElement = bodyElement.querySelector(".po-entries-list");
 
-const renderPoEntry = (poEntry) => {
+ const renderPoEntry = (poEntry) => {
   const poEntryListItem = document.createElement("li");
 
   poEntryListItem.innerHTML = `
@@ -624,7 +886,7 @@ const renderPoEntry = (poEntry) => {
   poEntriesListElement.appendChild(poEntryListItem);
 };
 
-const previewPrint = (orderNumber) => {
+ const previewPrint = (orderNumber) => {
   fetch(`http://localhost:3333/po_entries/print${orderNumber}`)
     .then((response) => {
       if (response.ok) {
@@ -643,7 +905,7 @@ const previewPrint = (orderNumber) => {
 
 const usersListElement = formElement.querySelector(".users-list");
 
-const renderUsers = (users) => {
+ const renderUsers = (users) => {
   users.forEach((user) => {
     const optionElement = document.createElement("option");
     optionElement.value = user.name;
@@ -652,12 +914,20 @@ const renderUsers = (users) => {
   });
 };
 
+const editCloseButton = poNumberForEditElement.querySelector(
+  ".po-number-for-edit--cancel"
+);
 
 const addNewLineButton = bodyElement.querySelector(".add-new-line-button");
+
 const closeButton = modalElement.querySelector(".close");
 const modalPrintButton = modalElement.querySelector(".modal-print");
+const modalEditButton = modalElement.querySelector(".modal-edit");
+
 const apiModalCloseButton = apiModalElement.querySelector(".close");
 const apiModalOkButton = apiModalElement.querySelector(".modal-ok");
+
+let editingPO = false;
 
 let orderLinesRenderedAmount = 0;
 const maxOrderLinesRenderedAmount = 10;
@@ -682,6 +952,12 @@ apiModalOkButton.addEventListener("click", () => {
   apiModalElement.style.display = "none";
 });
 
+editCloseButton.addEventListener("click", () => {
+  cancelEdit();
+  editingPO = false;
+  poSendForm.reset();
+});
+
 document.addEventListener("keydown", (evt) => {
   if (evt.key === "Escape") {
     modalElement.style.display = "none";
@@ -694,6 +970,13 @@ modalPrintButton.addEventListener("click", () => {
   previewPrint(oderNumberFromDataset);
 });
 
+modalEditButton.addEventListener("click", () => {
+  const oderNumberFromDataset = modalOrderNumberElement.dataset.orderNumber;
+  renderEdit(oderNumberFromDataset, modalElement);
+  editingPO = true;
+  modalElement.style.display = "none";
+});
+
 poSendForm.addEventListener("submit", (evt) => {
   evt.preventDefault();
 
@@ -703,39 +986,78 @@ poSendForm.addEventListener("submit", (evt) => {
 
   let newObj = {};
   formData.forEach((value, key) => (newObj[key] = value));
+  if (editingPO === true) {
+    const oderNumberFromDataset = poNumberForEditElement.dataset.orderNumber;
+    newObj.orderNumber = oderNumberFromDataset;
+  }
   newObj.orderLines = createOrderLineDTO();
   let newObjToJson = JSON.stringify(newObj);
 
-  console.log(newObjToJson);
+  if (editingPO === false) {
+    sendData(
+      () => {
+        hideLoadingModal();
+        showSuccessMessage('created');
+        cancelEdit();
 
-  sendData(
-    () => {
-      hideLoadingModal();
-      showSuccessMessage();
+        poEntriesListElement.innerHTML = "";
 
-      poEntriesListElement.innerHTML = "";
+        getData(
+          (data) => {
+            hideLoadingModal();
+            data.forEach((entry) => {
+              renderPoEntry(entry);
+            });
+          },
+          (error) => {
+            hideLoadingModal();
+            showErrorMessage(error);
+            console.log(`${error} - Unable to load data`);
+          }
+        );
+      },
+      () => {
+        hideLoadingModal();
+        showErrorMessage("Unable to send data");
+        throw new Error("Unable to send data");
+      },
+      newObjToJson
+    );
+    poSendForm.reset();
+  } else {
 
-      getData(
-        (data) => {
-          hideLoadingModal()
-          data.forEach((entry) => {
-            renderPoEntry(entry);
-          });
-        },
-        (error) => {
-          hideLoadingModal()
-          showErrorMessage(error);
-          console.log(`${error} - Unable to load data`);
-        }
-      );
-    },
-    () => {
-      hideLoadingModal()
-      showErrorMessage("Unable to send data");
-      throw new Error("Unable to send data");
-    },
-    newObjToJson
-  );
+    updatePOEntry(
+      () => {
+        hideLoadingModal();
+        showSuccessMessage('updated');
+        cancelEdit();
+
+        poEntriesListElement.innerHTML = "";
+
+        getData(
+          (data) => {
+            hideLoadingModal();
+            data.forEach((entry) => {
+              renderPoEntry(entry);
+            });
+          },
+          (error) => {
+            hideLoadingModal();
+            showErrorMessage(error);
+            console.log(`${error} - Unable to load data`);
+          }
+        );
+      },
+      () => {
+        hideLoadingModal();
+        showErrorMessage("Unable to send data");
+        throw new Error("Unable to send data");
+      },
+      newObjToJson
+    );
+    poSendForm.reset();
+    editingPO = false;
+  }
 });
 
 showLoadingModal();
