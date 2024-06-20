@@ -15,7 +15,7 @@ const sendData = (onSuccess, onFail, formData) => {
 };
 
 const updatePOEntry = (onSuccess, onFail, formData) => {
-  fetch('http://localhost:3333/po_entries',
+  fetch('http://localhost:3333/po_entries/update',
     {
       method: 'PUT',
       headers: {

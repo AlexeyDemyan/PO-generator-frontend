@@ -3,8 +3,8 @@ const apiModalElement = bodyElement.querySelector(".api-modal");
 const apiModalElementHeader = apiModalElement.querySelector("h1");
 const apiModalElementMessage = apiModalElement.querySelector("p");
 
-const showSuccessMessage = () => {
-  apiModalElementHeader.innerText = "PO Created successfully!";
+const showSuccessMessage = (status) => {
+  apiModalElementHeader.innerText = `PO ${status} successfully!`;
   apiModalElementMessage.innerText =
     "You can open and view it from the list below";
   apiModalElement.style.display = "block";

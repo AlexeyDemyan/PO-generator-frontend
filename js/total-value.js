@@ -2,7 +2,6 @@ const bodyElement = document.querySelector("body");
 const poSendForm = bodyElement.querySelector(".po-send-form");
 const formDiscountElement = poSendForm.querySelector('.discount-input');
 
-
 const netTotalValueInputElement = poSendForm.querySelector('.netTotalValue-input');
 
 export const calculateTotalValue = () => {

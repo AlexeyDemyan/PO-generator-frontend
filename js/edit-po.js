@@ -101,17 +101,16 @@ const populateModalValuesIntoForm = (modalElement) => {
     modalElement.querySelector(".modal-price-includes-vat").innerText;
 };
 
-const renderEdit = (orderNumber, modalElement, editingPOFlag) => {
+const renderEdit = (orderNumber, modalElement) => {
   window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
-  editingPOFlag = true;
   console.log(orderNumber);
-  console.log(modalElement);
+  poNumberForEditElement.dataset.orderNumber = orderNumber;
+  //console.log(modalElement);
   populateModalValuesIntoForm(modalElement);
   poNumberForEditElement.style.display = "block";
 };
 
-const cancelEdit = (editingPOFlag) => {
-  editingPOFlag = false;
+const cancelEdit = () => {
   poNumberForEditElement.style.display = "none";
 };
 

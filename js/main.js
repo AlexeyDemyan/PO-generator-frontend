@@ -61,6 +61,7 @@ apiModalOkButton.addEventListener("click", () => {
 editCloseButton.addEventListener("click", () => {
   cancelEdit();
   editingPO = false;
+  poSendForm.reset();
 });
 
 document.addEventListener("keydown", (evt) => {
@@ -83,7 +84,6 @@ modalEditButton.addEventListener("click", () => {
 });
 
 poSendForm.addEventListener("submit", (evt) => {
-  console.log(editingPO);
   evt.preventDefault();
 
   showLoadingModal();
@@ -92,42 +92,78 @@ poSendForm.addEventListener("submit", (evt) => {
 
   let newObj = {};
   formData.forEach((value, key) => (newObj[key] = value));
+  if (editingPO === true) {
+    const oderNumberFromDataset = poNumberForEditElement.dataset.orderNumber;
+    newObj.orderNumber = oderNumberFromDataset;
+  }
   newObj.orderLines = createOrderLineDTO();
   let newObjToJson = JSON.stringify(newObj);
 
-  console.log(newObjToJson);
+  if (editingPO === false) {
+    sendData(
+      () => {
+        hideLoadingModal();
+        showSuccessMessage('created');
+        cancelEdit();
 
-  sendData(
-    () => {
-      hideLoadingModal();
-      showSuccessMessage();
-      cancelEdit();
-      editingPO = false;
+        poEntriesListElement.innerHTML = "";
 
-      poEntriesListElement.innerHTML = "";
+        getData(
+          (data) => {
+            hideLoadingModal();
+            data.forEach((entry) => {
+              renderPoEntry(entry);
+            });
+          },
+          (error) => {
+            hideLoadingModal();
+            showErrorMessage(error);
+            console.log(`${error} - Unable to load data`);
+          }
+        );
+      },
+      () => {
+        hideLoadingModal();
+        showErrorMessage("Unable to send data");
+        throw new Error("Unable to send data");
+      },
+      newObjToJson
+    );
+    poSendForm.reset();
+  } else {
 
-      getData(
-        (data) => {
-          hideLoadingModal();
-          data.forEach((entry) => {
-            renderPoEntry(entry);
-          });
-        },
-        (error) => {
-          hideLoadingModal();
-          showErrorMessage(error);
-          console.log(`${error} - Unable to load data`);
-        }
-      );
-    },
-    () => {
-      hideLoadingModal();
-      showErrorMessage("Unable to send data");
-      throw new Error("Unable to send data");
-    },
-    newObjToJson
-  );
-  poSendForm.reset();
+    updatePOEntry(
+      () => {
+        hideLoadingModal();
+        showSuccessMessage('updated');
+        cancelEdit();
+
+        poEntriesListElement.innerHTML = "";
+
+        getData(
+          (data) => {
+            hideLoadingModal();
+            data.forEach((entry) => {
+              renderPoEntry(entry);
+            });
+          },
+          (error) => {
+            hideLoadingModal();
+            showErrorMessage(error);
+            console.log(`${error} - Unable to load data`);
+          }
+        );
+      },
+      () => {
+        hideLoadingModal();
+        showErrorMessage("Unable to send data");
+        throw new Error("Unable to send data");
+      },
+      newObjToJson
+    );
+    poSendForm.reset();
+    editingPO = false;
+  }
 });
 
 showLoadingModal();
