@@ -94,7 +94,7 @@ select {
 }
 
 .modal-order-lines-list--element {
-  min-width:300px;
+  min-width: 300px;
   width: 150%;
   display: flex;
   justify-content: space-around;
@@ -159,6 +159,41 @@ select {
   font-weight: 700;
 }
 
+/* Toggle Style Buttons */
+
+.header-button-container {
+  display: flex;
+}
+
+.button-wrapper {
+  margin: 0 auto;
+  width: 90px;
+  height: 50px;
+  background-color: gray;
+  border: 1px solid black;
+  border-radius: 30px;
+  cursor: pointer;
+  margin-bottom: 50px;
+}
+
+.checkbox-button {
+  background-color: white;
+  width: 45px;
+  height: 90%;
+  margin: 2.5px;
+  border-radius: inherit;
+  float: left;
+  transition: margin-left linear 0.08s;
+}
+
+.switchedOn {
+  margin-left: 42.5px;
+}
+
+.painted {
+  background-color: #3882f6;
+}
+
 /* Form */
 
 .po-number-for-edit {
@@ -192,22 +227,39 @@ select {
 
 .po-send-form {
   display: flex;
-  flex-direction: column;
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: flex-start;
 }
 
-.po-send-form > div {
+.po-send-form--old {
+  flex-direction: row;
+}
+
+.po-send-form--new {
+  flex-direction: column;
+}
+
+.po-send-form--old div {
+  display: flex;
+  flex-direction: column;
+}
+
+.po-send-form--new div {
   display: flex;
   flex-direction: row;
 }
 
-label {
+.po-send-form--new label {
   margin-top: 10px;
   margin-bottom: 5px;
   display: block;
   min-width: 200px;
+}
+
+.po-send-form--old label {
+  margin-top: 10px;
+  margin-bottom: 5px;
 }
 
 .form_content--container,

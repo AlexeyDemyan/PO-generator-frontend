@@ -17,6 +17,16 @@ const editCloseButton = poNumberForEditElement.querySelector(
   ".po-number-for-edit--cancel"
 );
 
+const headerElement = bodyElement.querySelector(".header");
+const toggleStyleButtonWrapper = headerElement.querySelector(
+  ".button-wrapper--toggle-style"
+);
+const toggleDarkModeButtonWrapper = headerElement.querySelector(
+  ".button-wrapper--toggle-dark-mode"
+);
+const toggleStyleButton = headerElement.querySelector(".toggle-style");
+const toggleDarkModeButton = headerElement.querySelector(".toggle-dark-mode");
+
 const formDiscountElement = poSendForm.querySelector(".discount-input");
 
 const addNewLineButton = bodyElement.querySelector(".add-new-line-button");
@@ -39,6 +49,28 @@ let orderLinesRenderedAmount = 0;
 const maxOrderLinesRenderedAmount = 10;
 renderOrderLine(orderLinesRenderedAmount, maxOrderLinesRenderedAmount);
 orderLinesRenderedAmount++;
+
+toggleStyleButtonWrapper.addEventListener("click", () => {
+  if (toggleStyleButton.classList.contains("switchedOn")) {
+    toggleStyleButton.classList.remove("switchedOn");
+    toggleStyleButtonWrapper.classList.remove("painted");
+    poSendForm.classList.remove("po-send-form--new");
+  } else {
+    toggleStyleButton.classList.add("switchedOn");
+    toggleStyleButtonWrapper.classList.add("painted");
+    poSendForm.classList.add("po-send-form--new");
+  }
+});
+
+toggleDarkModeButtonWrapper.addEventListener("click", () => {
+  if (toggleDarkModeButton.classList.contains("switchedOn")) {
+    toggleDarkModeButton.classList.remove("switchedOn");
+    toggleDarkModeButtonWrapper.classList.remove("painted");
+  } else {
+    toggleDarkModeButton.classList.add("switchedOn");
+    toggleDarkModeButtonWrapper.classList.add("painted");
+  }
+});
 
 addNewLineButton.addEventListener("click", (evt) => {
   evt.preventDefault();
@@ -103,7 +135,7 @@ poSendForm.addEventListener("submit", (evt) => {
     sendData(
       () => {
         hideLoadingModal();
-        showSuccessMessage('created');
+        showSuccessMessage("created");
         cancelEdit();
 
         poEntriesListElement.innerHTML = "";
@@ -131,11 +163,10 @@ poSendForm.addEventListener("submit", (evt) => {
     );
     poSendForm.reset();
   } else {
-
     updatePOEntry(
       () => {
         hideLoadingModal();
-        showSuccessMessage('updated');
+        showSuccessMessage("updated");
         cancelEdit();
 
         poEntriesListElement.innerHTML = "";
