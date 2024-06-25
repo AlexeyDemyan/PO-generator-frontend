@@ -11,7 +11,7 @@ const calculateTotalPrice = (
 ) => {
   totalPriceElement.value = (
     Number(quantityElement.value) * Number(priceElement.value)
-  ).toFixed(2);
+  ).toFixed(4);
 };
 
 export const renderOrderLine = (
@@ -26,8 +26,8 @@ export const renderOrderLine = (
   <input class="order-line--product" type="text">
   <input class="order-line--supplier-ref" type="text">
   <input class="order-line--quantity" type="number" step=".01">
-  <input class="order-line--unit-price" type="number" step=".01">
-  <input class="order-line--total-price" type="number" step=".01" readonly>`;
+  <input class="order-line--unit-price" type="number" step=".0001">
+  <input class="order-line--total-price" type="number" step=".0001" readonly>`;
 
     orderLinesList.appendChild(orderLineItem);
     orderLineItem

@@ -9,5 +9,5 @@ export const calculateTotalValue = () => {
   let totalSum = 0;
   totalPriceElements.forEach((elt) => {totalSum += Number(elt.value)});
   let totalDiscount = totalSum * Number(formDiscountElement.value) / 100;
-  netTotalValueInputElement.value = (totalSum - totalDiscount).toFixed(2);
+  netTotalValueInputElement.value = (totalSum - totalDiscount).toFixed(4);
 }
