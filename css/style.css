@@ -308,3 +308,7 @@ label {
 .po-entries-list--supplier {
   width: 20%;
 }
+
+#otherRemarks {
+  min-width: 680px;
+}
