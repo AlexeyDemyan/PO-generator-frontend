@@ -22,14 +22,15 @@ div {
 /* Header */
 
 .header {
-  width: 200px;
+  width: 100%;
   align-self: center;
   display: grid;
-  grid-template-columns: 200px 300px;
+  grid-template-columns: 20% 50% 30%;
   grid-template-rows: 160px 40px;
   grid-template-areas:
-    "header__logo header__address"
-    "header__company header__address";
+    "header__logo header__address header__number"
+    "header__company header__address header__number";
+    border-bottom: 1px solid black;
 }
 
 .header__logo {
@@ -46,12 +47,27 @@ div {
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
+  text-align: center;
 }
 
 .header__company {
   grid-area: header__company;
   font-weight: 600;
   font-size: 23px;
+}
+
+.header-number {
+  grid-area: header__number;
+  font-weight: 600;
+  font-size: 23px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+}
+
+.header-number div {
+  margin-bottom: 20px;
 }
 
 /* Title */
@@ -63,13 +79,25 @@ div {
   margin-top: 20px;
 }
 
-/* Company List */
+/* Data Columns */
 
-.section__company-list ul {
-  list-style: none;
+.section__data-columns {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  border-bottom: 1px solid black;
 }
 
-.section__company-list ul li {
+/* .section__data-columns .column-left {
+
+} */
+
+.section__data-columns ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.section__data-columns ul li {
   text-align: center;
   display: flex;
   justify-content: flex-start;
@@ -77,24 +105,13 @@ div {
   margin-bottom: 10px;
 }
 
-.section__company-list ul li div {
+.section__data-columns ul li div {
   margin-right: 20px;
-}
-
-.section__company-list ul li .company {
-  width: 380px;
-  text-align: left;
-}
-
-.tickbox {
-  height: 20px;
-  width: 20px;
-  border: 2px solid black;
 }
 
 /* Supplier Section */
 
-.section__supplier {
+/* .section__supplier {
   display: grid;
   grid-template-columns: 500px 500px;
   grid-template-rows: 50px 50px 50px;
@@ -122,74 +139,87 @@ div {
 .supplier-order--text {
   width: 300px;
   border-bottom: 1px solid black;
-}
+} */
 
 /* PO Entry Lines */
 
-.section__po-entry-lines table {
+.section__item-entry-lines {
+  border-bottom: 1px solid black;
+}
+
+.section__item-entry-lines th {
+  text-decoration: underline;
+}
+
+.section__item-entry-lines table {
   border-collapse: collapse;
 }
 
-.section__po-entry-lines table th {
-  border: 3px solid black;
-}
-
-.section__po-entry-lines table tr :first-child {
-  min-width: 400px;
-}
-
-.section__po-entry-lines table td {
+.section__item-entry-lines table td {
   height: 25px;
   text-align: center;
-  border: 1px solid black;
 }
 
-/* Bottom Info */
+/* Summary */
 
-.section__bottom-info {
-  display: grid;
-  grid-template-columns: 500px 500px;
-  grid-template-rows: 50px 50px 120px;
-}
-
-.section__bottom-info div {
+.section__summary {
   display: flex;
   flex-direction: row;
-  align-items: end;
+  justify-content: space-between;
 }
 
-.delivery-date--title,
-.discount--title,
-.payment-terms--title,
-.net-total-value--title,
-.other-remarks--title,
-.price-includes-vat--title {
-  width: 140px;
+.deposit-summary--table th,
+.vat-summary--table th,
+.totals--table th  {
+  text-decoration: underline;
 }
 
+/* Totals */
 
-.delivery-date--text,
-.discount--text,
-.payment-terms--text,
-.net-total-value--text,
-.other-remarks--text,
-.price-includes-vat--text {
-  width: 300px;
-  border-bottom: 1px solid black;
+.section__totals {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.section__totals ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.section__totals ul li {
+  text-align: center;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.section__totals ul li div {
+  margin-right: 20px;
+}
+
+/* Remarks */
+
+.section__remarks {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  border: 1px solid black;
 }
 
 /* Footer */
 
 footer {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: space-between;
 }
 
-footer .conditions-header {
-  margin-top: 20px;
-  height: 20px;
-  font-weight: 600;
+footer .signatures {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
 footer .signature {
