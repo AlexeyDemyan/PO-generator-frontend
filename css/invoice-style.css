@@ -177,6 +177,18 @@ td {
   margin-top: 10px;
 }
 
+.section__summary th {
+  font-size: 12px;
+}
+
+.deposit-summary {
+  min-width: 650px;
+}
+
+.vat-summary {
+  min-width: 250px;
+}
+
 .deposit-summary, .vat-summary {
   border: 1px solid black;
 }
