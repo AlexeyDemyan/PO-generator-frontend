@@ -205,7 +205,9 @@
       </div>
       <div class="section section__summary">
         <div class="deposit-summary">
-          <div class="deposit-summary--header">Deposit Summary</div>
+          <div class="deposit-summary--header background-grey">
+            Deposit Summary
+          </div>
           <div class="deposit-summary--table">
             <table>
               <tr>
@@ -229,7 +231,6 @@
                 <td>6</td>
                 <td>7</td>
                 <td>8</td>
-                <td>9</td>
               </tr>
               <tr class="table-row-2">
                 <td>Total Value</td>
@@ -241,13 +242,12 @@
                 <td>6</td>
                 <td>7</td>
                 <td>8</td>
-                <td>9</td>
               </tr>
             </table>
           </div>
         </div>
         <div class="vat-summary">
-          <div class="vat-summary--header">VAT Summary</div>
+          <div class="vat-summary--header background-grey">VAT Summary</div>
           <div class="vat-summary--table">
             <table>
               <tr>
@@ -349,6 +349,8 @@
                 <td></td>
                 <td>Total Deposits Value</td>
                 <td></td>
+                <td></td>
+                <td class="background-grey"></td>
               </tr>
             </table>
           </div>
@@ -369,7 +371,9 @@
             </li>
             <li>
               <div class="totals-column__name">Invoice Total</div>
-              <div class="totals-column__value">&#8364;99.99</div>
+              <div class="totals-column__value background-grey">
+                &#8364;99.99
+              </div>
             </li>
             <li>
               <div class="totals-column__name">
@@ -391,24 +395,43 @@
             </li>
             <li>
               <div class="totals-column__name">Total Due</div>
-              <div class="totals-column__value">555.55</div>
+              <div class="totals-column__value background-grey">555.55</div>
             </li>
           </ul>
         </div>
       </div>
       <div class="section section__remarks">
-        <div class="column-left">Remarks</div>
-        <div class="column-right">Paid Cash</div>
+        <div class="column-left">
+          <p class="undescore-bold">Remarks:</p>
+          <p>lorem lorem</p>
+        </div>
+        <div class="column-right background-grey">
+          <div>
+            <p>Paid Cash</p>
+            <div class="tickbox"></div>
+          </div>
+          <div><p>Pad Chq No:</p></div>
+        </div>
       </div>
       <p>Received in good order and condition</p>
       <footer class="footer">
         <div class="signatures">
-          <div class="signature">
-            <p class="signature-text">Client's Signature</p>
+          <div class="column-left">
+            <div class="signature">
+              <p class="signature-text">Client's Signature</p>
+              <div class="signature-underscore"></div>
+            </div>
           </div>
-          <div class="signature">
-            <p class="signature-text">Name in BLOCKS</p>
-            <p class="signature-text">Client's ID Card</p>
+
+          <div class="column-right">
+            <div class="signature">
+              <p class="signature-text">Name in BLOCKS</p>
+              <div class="signature-underscore"></div>
+            </div>
+            <div class="signature">
+              <p class="signature-text">Client's ID Card</p>
+              <div class="signature-underscore"></div>
+            </div>
           </div>
         </div>
         <div class="disclaimer">
